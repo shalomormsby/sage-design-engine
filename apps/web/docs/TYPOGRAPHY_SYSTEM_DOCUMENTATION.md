@@ -648,7 +648,7 @@ See individual font licenses on [Google Fonts](https://fonts.google.com/).
 ## Support
 
 - **Documentation**: [Sage Studio](https://thesage.dev/#themes/typography)
-- **Issues**: [GitHub Issues](https://github.com/shalomormsby/ecosystem/issues)
+- **Issues**: [GitHub Issues](https://github.com/shalomormsby/sage-design-engine/issues)
 - **Questions**: Open a discussion or reach out
 
 ---

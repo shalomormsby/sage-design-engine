@@ -409,7 +409,7 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 - **pnpm Workspace:** https://pnpm.io/workspaces
 - **Changesets:** https://github.com/changesets/changesets
 - **Sage Studio:** https://thesage.dev/
-- **GitHub:** https://github.com/shalomormsby/ecosystem
+- **GitHub:** https://github.com/shalomormsby/sage-design-engine
 
 ---
 

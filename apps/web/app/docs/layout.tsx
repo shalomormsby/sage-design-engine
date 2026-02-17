@@ -40,7 +40,7 @@ const collectionJsonLd = {
   mainEntity: {
     '@type': 'SoftwareSourceCode',
     name: PRODUCT_NAME,
-    codeRepository: 'https://github.com/shalomormsby/ecosystem',
+    codeRepository: 'https://github.com/shalomormsby/sage-design-engine',
     programmingLanguage: ['TypeScript', 'React'],
     runtimePlatform: 'Node.js',
   },

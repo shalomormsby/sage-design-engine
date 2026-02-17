@@ -1655,7 +1655,7 @@ import { labelVariants } from '@thesage/ui'
 # RESOURCES
 
 - Docs: https://thesage.dev/docs/overview
-- GitHub: https://github.com/shalomormsby/ecosystem
+- GitHub: https://github.com/shalomormsby/sage-design-engine
 - NPM: https://www.npmjs.com/package/@thesage/ui
 - MCP: https://www.npmjs.com/package/@thesage/mcp
 - API JSON: https://thesage.dev/docs/api.json

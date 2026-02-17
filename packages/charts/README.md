@@ -3,11 +3,11 @@
 <div align="center">
 
 [![npm version](https://img.shields.io/npm/v/@thesage/charts?color=indigo&style=flat-square)](https://www.npmjs.com/package/@thesage/charts)
-[![License](https://img.shields.io/npm/l/@thesage/charts?color=blue&style=flat-square)](https://github.com/shalomormsby/ecosystem/blob/main/LICENSE)
+[![License](https://img.shields.io/npm/l/@thesage/charts?color=blue&style=flat-square)](https://github.com/shalomormsby/sage-design-engine/blob/main/LICENSE)
 
 **Beautiful, responsive charts for Sage UI.**
 
-[Documentation](https://thesage.dev) • [GitHub](https://github.com/shalomormsby/ecosystem)
+[Documentation](https://thesage.dev) • [GitHub](https://github.com/shalomormsby/sage-design-engine)
 
 </div>
 

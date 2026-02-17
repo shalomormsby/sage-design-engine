@@ -39,7 +39,7 @@ export default function LandingPage() {
             className="gap-2"
           >
             <a
-              href="https://github.com/shalomormsby/ecosystem"
+              href="https://github.com/shalomormsby/sage-design-engine"
               target="_blank"
               rel="noopener noreferrer"
             >

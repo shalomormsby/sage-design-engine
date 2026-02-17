@@ -192,7 +192,7 @@ Templates, visual regression tests, prompt library, MCP reference docs. All not 
 | `thesage.dev/robots.txt` | **200** | ClaudeBot, GPTBot, Google-Extended explicitly allowed. |
 | npm `@thesage/ui` | **1.1.0** | 11 subpath exports. 38 deps. 11 peer deps. No `bin` field. No keywords. |
 | npm `@thesage/mcp` | **0.8.1** | Single dep (@modelcontextprotocol/sdk). Has `bin: sds-mcp`. |
-| GitHub `shalomormsby/ecosystem` | **1 star** | 0 forks. Last push: today (2026-02-16). No license. TypeScript. |
+| GitHub `shalomormsby/sage-design-engine` | **1 star** | 0 forks. Last push: today (2026-02-16). No license. TypeScript. |
 
 ---
 
@@ -427,9 +427,8 @@ Fixed: `Tools (8): list_components, search_components, get_component, install_co
 
 ### Project Overview
 
-This is a monorepo at `/Users/shalomormsby/Developer/work/ecosystem` containing:
+This is a monorepo containing:
 - `apps/web/` — Sage Design Engine docs site (Next.js App Router), deployed at thesage.dev
-- `apps/portfolio/` — Portfolio site
 - `packages/ui/` — `@thesage/ui` component library (92→99 components)
 - `packages/mcp/` — `@thesage/mcp` MCP server for AI assistants
 - `packages/tokens/` — `@thesage/tokens` design tokens
@@ -570,4 +569,4 @@ Full metadata (props, description, examples, keywords, dependencies) for each is
 
 ---
 
-*This plan should be re-evaluated after each optimization pass. Track progress in the [CHANGELOG.md](https://github.com/shalomormsby/ecosystem/blob/main/CHANGELOG.md).*
+*This plan should be re-evaluated after each optimization pass. Track progress in the [CHANGELOG.md](https://github.com/shalomormsby/sage-design-engine/blob/main/CHANGELOG.md).*
