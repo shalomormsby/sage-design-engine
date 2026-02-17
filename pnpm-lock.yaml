@@ -41,9 +41,6 @@ importers:
       '@thesage/charts':
         specifier: workspace:*
         version: link:../../packages/charts
-      '@thesage/core':
-        specifier: workspace:*
-        version: link:../../packages/core
       '@thesage/hooks':
         specifier: workspace:*
         version: link:../../packages/hooks
@@ -156,31 +153,6 @@ importers:
         version: 5.9.3
 
   packages/config: {}
-
-  packages/core:
-    dependencies:
-      react:
-        specifier: ^19.2.1
-        version: 19.2.4
-      zustand:
-        specifier: ^5.0.2
-        version: 5.0.11(@types/react@19.2.14)(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4))
-    devDependencies:
-      '@thesage/config':
-        specifier: workspace:*
-        version: link:../config
-      '@thesage/tokens':
-        specifier: workspace:*
-        version: link:../tokens
-      '@types/react':
-        specifier: ^19
-        version: 19.2.14
-      tsup:
-        specifier: ^8.0.0
-        version: 8.5.1(jiti@1.21.7)(postcss@8.5.6)(typescript@5.9.3)
-      typescript:
-        specifier: ^5.0.0
-        version: 5.9.3
 
   packages/hooks:
     dependencies:
@@ -427,15 +399,6 @@ importers:
       zod:
         specifier: ^3.24.1
         version: 3.25.76
-
-  packages/utils:
-    devDependencies:
-      tsup:
-        specifier: ^8.5.1
-        version: 8.5.1(jiti@1.21.7)(postcss@8.5.6)(typescript@5.9.3)
-      typescript:
-        specifier: ^5
-        version: 5.9.3
 
 packages:
 

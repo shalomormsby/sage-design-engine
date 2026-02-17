@@ -1,65 +1,114 @@
-# Sage Tokens (@thesage/tokens)
+# @thesage/tokens
 
-<div align="center">
+Design tokens for the Sage Design Engine — the foundation layer that defines colors, typography, spacing, motion curves, and syntax highlighting across three themes.
 
-[![npm version](https://img.shields.io/npm/v/@thesage/tokens?color=indigo&style=flat-square)](https://www.npmjs.com/package/@thesage/tokens)
-[![License](https://img.shields.io/npm/l/@thesage/tokens?color=blue&style=flat-square)](https://github.com/shalomormsby/ecosystem/blob/main/LICENSE)
+[![npm version](https://img.shields.io/npm/v/@thesage/tokens?style=flat-square)](https://www.npmjs.com/package/@thesage/tokens)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**The Design Foundation for the Sage Ecosystem.**
+## Why a separate package?
 
-[Documentation](https://thesage.dev) • [GitHub](https://github.com/shalomormsby/ecosystem)
+Tokens are **design decisions as code**. They serve audiences beyond React components — CSS-only projects, native apps, Figma plugins, or anyone building their own component layer on top of Sage's design language. Install `@thesage/tokens` for just the values, or get them bundled with components via `@thesage/ui/tokens`.
 
-</div>
-
----
-
-**Sage Tokens** provides the raw design values (colors, typography, spacing, animations) that power the Sage UI. It includes a multi-theme engine supporting **Studio**, **Terra**, and **Volt** themes, along with a sophisticated dynamic color palette generator.
-
-## ✨ Features
-
-- **🎨 Multi-Theme Support**: Built-in support for multiple distinct visual languages.
-- **🌗 Mode Aware**: First-class light/dark mode tokens.
-- **🌈 Dynamic Palettes**: Utilities to generate accessible color scales from a single hex value.
-- **🔢 Typed**: Fully typed TypeScript interfaces for all tokens.
-
-## 🚀 Installation
+## Installation
 
 ```bash
+npm install @thesage/tokens
+# or
 pnpm add @thesage/tokens
 ```
 
-## 💻 Usage
+If you're already using `@thesage/ui`, tokens are re-exported via the `@thesage/ui/tokens` subpath — no separate install needed.
 
-### Accessing Raw Tokens
-You can import specific token sets directly if you need to use them in JavaScript/TypeScript environments (outside of CSS).
+## Usage
 
-```ts
-import { studioTokens, terraTokens, voltTokens } from '@thesage/tokens';
+### Theme tokens
 
-const primaryColor = studioTokens.light.colors.primary;
-```
-
-### Color Utilities
-The package includes powerful color transformation utilities used by the Customizer.
+Each theme exports a complete set of design values for light and dark modes:
 
 ```ts
-import { hexToHSL, generateColorScale } from '@thesage/tokens';
+import { studioTokens, terraTokens, voltTokens } from '@thesage/tokens'
 
-// Convert Hex to HSL
-const hsl = hexToHSL('#3b82f6'); // "217 91% 60%"
-
-// Generate a full Tailwind-style scale (50-950)
-const scale = generateColorScale('#3b82f6');
+const primary = studioTokens.light.colors.primary
+const heading = terraTokens.dark.colors.foreground
 ```
 
-## 🎨 Available Themes
+### Typography system
 
-| Theme | Description |
-| :--- | :--- |
-| **Studio** | The default, balanced, professional aesthetic. |
-| **Terra** | A warm, earthy, and organic visual language. |
-| **Volt** | A high-contrast, energetic, digital-native look. |
+```ts
+import { typographySystem } from '@thesage/tokens'
 
-## 📄 License
+// Access size scales (xs through 8xl), font stacks, and type presets
+const bodySize = typographySystem.sizes.base
+```
 
-MIT © [Shalom Ormsby](https://github.com/shalomormsby)
+### Font themes
+
+```ts
+import { fontThemes } from '@thesage/tokens'
+
+// 10+ curated font combinations with Google Fonts integration
+const editorial = fontThemes.editorial // { heading, body, mono, bestFor }
+```
+
+### Color utilities
+
+Generate accessible color scales from a single hex value:
+
+```ts
+import { hexToHSL, generateColorScale } from '@thesage/tokens'
+
+const hsl = hexToHSL('#3b82f6')           // "217 91% 60%"
+const scale = generateColorScale('#3b82f6') // Full 50-950 scale
+```
+
+### Color palettes
+
+Pre-built palettes with light/dark mode support:
+
+```ts
+import { colorPalettes } from '@thesage/tokens'
+```
+
+### Syntax highlighting
+
+14 token types for code highlighting, theme-aware:
+
+```ts
+import { syntaxTokens } from '@thesage/tokens'
+```
+
+### Type helpers
+
+```ts
+import type { ThemeName, ColorMode, ThemeConfig } from '@thesage/tokens'
+
+const config: ThemeConfig = { name: 'studio', mode: 'dark' }
+```
+
+## Themes
+
+| Theme | Personality | Colors |
+|-------|------------|--------|
+| **Studio** | Professional, balanced | Cool blues, grays |
+| **Terra** | Calm, organic | Earth tones, sage greens |
+| **Volt** | Bold, electric | Electric blues, cyans |
+
+All themes include WCAG AA compliant color combinations.
+
+## Exports
+
+| Export | Description |
+|--------|-------------|
+| `studioTokens`, `terraTokens`, `voltTokens` | Complete theme token sets |
+| `typographySystem` | Size scales, font stacks, presets |
+| `fontThemes` | Curated font combinations |
+| `colorPalettes` | Pre-built color palettes |
+| `syntaxTokens` | Syntax highlighting tokens |
+| `hexToHSL`, `generateColorScale` | Color conversion utilities |
+| `tokenGraph` | Token dependency graph |
+| `ThemeName`, `ColorMode`, `ThemeConfig` | TypeScript types |
+| `THEME_NAMES`, `COLOR_MODES` | Runtime constants |
+
+## License
+
+MIT

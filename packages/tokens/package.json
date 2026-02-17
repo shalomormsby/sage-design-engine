@@ -1,12 +1,34 @@
 {
     "name": "@thesage/tokens",
-    "version": "0.0.3",
+    "version": "1.0.0",
+    "description": "Design tokens for the Sage Design Engine — colors, typography, spacing, motion curves, and syntax highlighting across Studio, Terra, and Volt themes.",
+    "license": "MIT",
+    "author": "Shalom Ormsby",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/shalomormsby/sage-design-engine.git",
+        "directory": "packages/tokens"
+    },
+    "homepage": "https://thesage.dev",
+    "bugs": "https://github.com/shalomormsby/sage-design-engine/issues",
+    "keywords": [
+        "design-tokens",
+        "design-system",
+        "themes",
+        "colors",
+        "typography",
+        "spacing",
+        "css-variables",
+        "tailwind",
+        "sage"
+    ],
     "publishConfig": {
         "access": "public"
     },
     "main": "dist/index.js",
     "module": "dist/index.mjs",
     "types": "dist/index.d.ts",
+    "sideEffects": false,
     "scripts": {
         "build": "tsup src/index.ts --format esm,cjs --dts",
         "dev": "tsup src/index.ts --format esm,cjs --dts --watch"
