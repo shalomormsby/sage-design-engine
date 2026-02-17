@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-02-16T22:00:00Z
+
+- Updated all GitHub URLs from `shalomormsby/ecosystem` to `shalomormsby/sage-design-engine` across 32 files
+  - Package READMEs (`ui`, `mcp`, `tokens`, `config`, `hooks`, `charts`)
+  - Package `.claude/CLAUDE.md` AI context
+  - MCP server source (`packages/mcp/src/index.ts` — GitHub link in `get_component` output)
+  - Studio app components, layouts, error pages, and navigation
+  - Public assets: `llms.txt`, `llms-full.txt`, `ai-plugin.json`, `mcp-server.json`
+  - Internal docs: `CLI_COMMANDS.md`, `SAGE_DESIGN_SYSTEM_STRATEGY.md`, `TYPOGRAPHY_SYSTEM_DOCUMENTATION.md`
+- Redacted hardcoded local paths (`/Users/shalomormsby/...`) from `plan-to-improve-sde-to-a-plus.md` and `SAGE_DESIGN_SYSTEM_STRATEGY.md`
+- Removed portfolio app reference from `plan-to-improve-sde-to-a-plus.md`
+- Added `CONTRIBUTING.md` — development guidelines, code standards, and contribution workflow
+- Added `.github/PULL_REQUEST_TEMPLATE.md` — checklist for accessibility, theming, and build verification
+
 ## 2026-02-16
 
 - Initial repository creation — extracted Sage Design Engine from ecosystem monorepo

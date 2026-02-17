@@ -45,7 +45,7 @@ const organizationJsonLd = {
   logo: 'https://thesage.dev/favicon.ico',
   description: PRODUCT_DESCRIPTION,
   sameAs: [
-    'https://github.com/shalomormsby/ecosystem',
+    'https://github.com/shalomormsby/sage-design-engine',
     'https://www.npmjs.com/package/@thesage/ui',
   ],
 };

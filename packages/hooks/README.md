@@ -3,11 +3,11 @@
 <div align="center">
 
 [![npm version](https://img.shields.io/npm/v/@thesage/hooks?color=indigo&style=flat-square)](https://www.npmjs.com/package/@thesage/hooks)
-[![License](https://img.shields.io/npm/l/@thesage/hooks?color=blue&style=flat-square)](https://github.com/shalomormsby/ecosystem/blob/main/LICENSE)
+[![License](https://img.shields.io/npm/l/@thesage/hooks?color=blue&style=flat-square)](https://github.com/shalomormsby/sage-design-engine/blob/main/LICENSE)
 
 **Essential React Hooks for the Solopreneur.**
 
-[Documentation](https://thesage.dev) • [GitHub](https://github.com/shalomormsby/ecosystem)
+[Documentation](https://thesage.dev) • [GitHub](https://github.com/shalomormsby/sage-design-engine)
 
 </div>
 

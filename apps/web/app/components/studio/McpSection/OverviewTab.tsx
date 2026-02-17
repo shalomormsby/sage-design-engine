@@ -129,7 +129,7 @@ export function OverviewTab() {
                             View the complete README and API documentation
                         </p>
                         <a
-                            href="https://github.com/shalomormsby/ecosystem/tree/main/packages/mcp"
+                            href="https://github.com/shalomormsby/sage-design-engine/tree/main/packages/mcp"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-sm text-[var(--color-primary)] hover:underline"
@@ -172,7 +172,7 @@ export function OverviewTab() {
                             Found a bug or have a feature request?
                         </p>
                         <a
-                            href="https://github.com/shalomormsby/ecosystem/issues"
+                            href="https://github.com/shalomormsby/sage-design-engine/issues"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-sm text-[var(--color-primary)] hover:underline"

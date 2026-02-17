@@ -37,6 +37,6 @@ import '@thesage/ui/globals.css'
 - Discovery: https://thesage.dev/.well-known/mcp-server.json
 
 ## Resources
-- GitHub: https://github.com/shalomormsby/ecosystem
+- GitHub: https://github.com/shalomormsby/sage-design-engine
 - NPM: https://www.npmjs.com/package/@thesage/ui
-- AGENTS.md: https://github.com/shalomormsby/ecosystem/blob/main/AGENTS.md
+- AGENTS.md: https://github.com/shalomormsby/sage-design-engine/blob/main/AGENTS.md

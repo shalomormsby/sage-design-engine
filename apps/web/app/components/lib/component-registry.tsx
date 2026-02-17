@@ -183,7 +183,7 @@ export const componentRegistry: Record<string, ComponentConfig> = {
         description: 'Error alert using destructive variant',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Alert.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Alert.tsx',
     accessibilityNotes: [
       'Uses role="alert" for screen reader announcements',
       'WCAG 2.1 AA compliant color contrast',
@@ -236,7 +236,7 @@ export const componentRegistry: Record<string, ComponentConfig> = {
         description: 'Avatar with image and fallback',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Avatar.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Avatar.tsx',
   },
 
   Button: {
@@ -308,7 +308,7 @@ export const componentRegistry: Record<string, ComponentConfig> = {
         description: 'All available button sizes',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Button.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Button.tsx',
     accessibilityNotes: [
       'Uses semantic <button> element for proper keyboard and screen reader support',
       'focus-visible outline ensures visible focus ring only for keyboard navigation',
@@ -416,7 +416,7 @@ export const componentRegistry: Record<string, ComponentConfig> = {
         description: 'Using subcomponents for structured layout',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/design-system/atoms/Card/Card.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/design-system/atoms/Card/Card.tsx',
   },
 
   Dialog: {
@@ -500,7 +500,7 @@ export const componentRegistry: Record<string, ComponentConfig> = {
         description: 'Confirmation dialog with footer actions',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Dialog.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Dialog.tsx',
     accessibilityNotes: [
       'Built on Radix UI Dialog primitive with full ARIA support',
       'Focus automatically trapped within dialog when open',
@@ -579,7 +579,7 @@ console.log(greeting);\`)}
         description: 'Combining inline and block code in documentation',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/design-system/atoms/Code/Code.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/design-system/atoms/Code/Code.tsx',
   },
 
   Link: {
@@ -670,7 +670,7 @@ console.log(greeting);\`)}
         description: 'Using links in navigation menus',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/design-system/atoms/Link/Link.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/design-system/atoms/Link/Link.tsx',
   },
 
   Badge: {
@@ -750,7 +750,7 @@ console.log(greeting);\`)}
         description: 'Using badges as category or technology tags',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Badge.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Badge.tsx',
   },
 
   Sidebar: {
@@ -880,7 +880,7 @@ export default function AppSidebar() {
         description: 'Using the depth prop to create visual hierarchy for nested navigation.',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/layout/Sidebar.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/layout/Sidebar.tsx',
     accessibilityNotes: [
       'Uses semantically correct <aside> element for the root container.',
       'Navigation items use <button> or Slot for keyboard interaction.',
@@ -953,7 +953,7 @@ export default function AppSidebar() {
         description: 'Spinner as loading overlay for content area',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/design-system/atoms/Spinner/Spinner.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/design-system/atoms/Spinner/Spinner.tsx',
   },
 
   ProgressBar: {
@@ -1041,7 +1041,7 @@ useEffect(() => {
         description: 'Animated progress bar that updates over time',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/design-system/atoms/ProgressBar/ProgressBar.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/design-system/atoms/ProgressBar/ProgressBar.tsx',
   },
 
   Switch: {
@@ -1101,7 +1101,7 @@ const [darkMode, setDarkMode] = useState(false);
         description: 'Switch in all available sizes'
       }
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/design-system/atoms/Switch/Switch.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/design-system/atoms/Switch/Switch.tsx',
   },
 
   Checkbox: {
@@ -1126,7 +1126,7 @@ const [darkMode, setDarkMode] = useState(false);
         description: 'Checkbox with a label'
       }
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Checkbox.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Checkbox.tsx',
   },
 
   Select: {
@@ -1169,7 +1169,7 @@ const [darkMode, setDarkMode] = useState(false);
         description: 'Basic select dropdown'
       }
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Select.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Select.tsx',
   },
 
   Separator: {
@@ -1218,7 +1218,7 @@ const [darkMode, setDarkMode] = useState(false);
         description: 'Basic usage'
       }
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Separator.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Separator.tsx',
   },
 
   ScrollArea: {
@@ -1253,7 +1253,7 @@ const [darkMode, setDarkMode] = useState(false);
         description: 'Scrollable area with custom scrollbar'
       }
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/ScrollArea.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/ScrollArea.tsx',
   },
 
   Skeleton: {
@@ -1324,7 +1324,7 @@ const [darkMode, setDarkMode] = useState(false);
         description: 'Loading skeleton for a list of items',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Skeleton.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Skeleton.tsx',
   },
 
 
@@ -1419,7 +1419,7 @@ const [darkMode, setDarkMode] = useState(false);
         description: 'Simple dropdown menu with labeled sections',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/DropdownMenu.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/DropdownMenu.tsx',
     accessibilityNotes: [
       'Built on Radix UI DropdownMenu primitive with full ARIA support',
       'Keyboard navigation with arrow keys, Enter, and Escape',
@@ -1479,7 +1479,7 @@ const [darkMode, setDarkMode] = useState(false);
         description: 'Radio group with two options',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/RadioGroup.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/RadioGroup.tsx',
     accessibilityNotes: [
       'Built on Radix UI RadioGroup primitive',
       'Keyboard navigation with arrow keys',
@@ -1557,7 +1557,7 @@ const [darkMode, setDarkMode] = useState(false);
         description: 'Sheet sliding from different sides',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Sheet.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Sheet.tsx',
     accessibilityNotes: [
       'Built on Radix UI Dialog primitive (repurposed as sheet)',
       'Focus trap within sheet when open',
@@ -1625,7 +1625,7 @@ const [darkMode, setDarkMode] = useState(false);
         description: 'Simple table with header and body',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Table.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Table.tsx',
     accessibilityNotes: [
       'Uses semantic HTML table elements',
       'Proper table structure with thead and tbody',
@@ -1701,7 +1701,7 @@ function ProfileForm() {
         description: 'Complete form with validation using react-hook-form and zod',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Form.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Form.tsx',
     accessibilityNotes: [
       'Built on react-hook-form for accessibility',
       'Proper form field associations with labels',
@@ -1770,7 +1770,7 @@ export function PaymentsTable() {
         description: 'Data table with sorting and pagination',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/DataTable.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/DataTable.tsx',
     accessibilityNotes: [
       'Built on TanStack Table with full accessibility support',
       'Keyboard navigation through table cells',
@@ -1837,7 +1837,7 @@ import { Textarea } from "@thesage/ui"
         description: 'Textarea with a label',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Textarea.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Textarea.tsx',
   },
   Input: {
     component: Input,
@@ -2085,7 +2085,7 @@ const frameworks = [
         description: 'Searchable select with custom options',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Combobox.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Combobox.tsx',
   },
   Command: {
     component: Command,
@@ -2142,7 +2142,7 @@ const frameworks = [
         description: 'Command palette with search and grouped items',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Command.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Command.tsx',
   },
   Popover: {
     component: Popover,
@@ -2193,7 +2193,7 @@ import { Button } from "@thesage/ui"
         description: 'Popover with custom content',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Popover.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Popover.tsx',
   },
   Tabs: {
     component: Tabs,
@@ -2253,7 +2253,7 @@ import { Button } from "@thesage/ui"
         description: 'Basic tabbed interface',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Tabs.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Tabs.tsx',
   },
   Toaster: {
     component: Toaster,
@@ -2321,7 +2321,7 @@ toast("Event created", {
         description: 'Using toast notifications',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Sonner.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Sonner.tsx',
   },
 
   // Phase 3 Batch 1 Components
@@ -2375,7 +2375,7 @@ toast("Event created", {
         description: 'Simple accordion with collapsible items',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Accordion.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Accordion.tsx',
   },
 
   AlertDialog: {
@@ -2432,7 +2432,7 @@ toast("Event created", {
         description: 'Confirmation dialog for destructive actions',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/AlertDialog.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/AlertDialog.tsx',
   },
 
   Collapsible: {
@@ -2476,7 +2476,7 @@ toast("Event created", {
         description: 'Collapsible panel with trigger',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Collapsible.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Collapsible.tsx',
   },
 
   HoverCard: {
@@ -2516,7 +2516,7 @@ toast("Event created", {
         description: 'Hover card with preview content',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/HoverCard.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/HoverCard.tsx',
   },
 
   Tooltip: {
@@ -2557,7 +2557,7 @@ toast("Event created", {
         description: 'Simple tooltip on hover',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Tooltip.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Tooltip.tsx',
   },
 
   // Phase 3 Batch 2 Components
@@ -2586,7 +2586,7 @@ toast("Event created", {
         description: 'Range slider with default value',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Slider.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Slider.tsx',
   },
 
   Toggle: {
@@ -2629,7 +2629,7 @@ toast("Event created", {
         description: 'Simple toggle button',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Toggle.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Toggle.tsx',
   },
 
   ToggleGroup: {
@@ -2674,7 +2674,7 @@ toast("Event created", {
         description: 'Toggle group with single selection',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/ToggleGroup.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/ToggleGroup.tsx',
   },
 
   AspectRatio: {
@@ -2705,7 +2705,7 @@ toast("Event created", {
         description: 'Maintain aspect ratio for images',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/AspectRatio.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/AspectRatio.tsx',
   },
 
   Progress: {
@@ -2730,7 +2730,7 @@ toast("Event created", {
         description: 'Progress indicator',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Progress.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Progress.tsx',
   },
 
   // Phase 3 Batch 3 Components
@@ -2778,7 +2778,7 @@ toast("Event created", {
         description: 'Navigation breadcrumb trail',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Breadcrumb.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Breadcrumb.tsx',
   },
 
   ContextMenu: {
@@ -2820,7 +2820,7 @@ toast("Event created", {
         description: 'Context menu on right-click',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/ContextMenu.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/ContextMenu.tsx',
   },
 
   Menubar: {
@@ -2865,7 +2865,7 @@ toast("Event created", {
         description: 'Application menubar',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Menubar.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Menubar.tsx',
   },
 
   NavigationMenu: {
@@ -2911,7 +2911,7 @@ toast("Event created", {
         description: 'Navigation menu with dropdowns',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/NavigationMenu.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/NavigationMenu.tsx',
   },
 
   Pagination: {
@@ -2967,7 +2967,7 @@ toast("Event created", {
         description: 'Page navigation controls',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Pagination.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Pagination.tsx',
   },
 
   // Phase 3 Batch 4 Components
@@ -3017,7 +3017,7 @@ toast("Event created", {
         description: 'Bottom drawer panel',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Drawer.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Drawer.tsx',
   },
 
   Carousel: {
@@ -3082,7 +3082,7 @@ toast("Event created", {
         description: 'Image/content carousel',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Carousel.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Carousel.tsx',
   },
 
   Calendar: {
@@ -3119,7 +3119,7 @@ const [date, setDate] = useState<Date | undefined>(new Date())
         description: 'Single date selection',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Calendar.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Calendar.tsx',
   },
 
   DatePicker: {
@@ -3157,7 +3157,7 @@ const [date, setDate] = useState<Date | undefined>(new Date())
         description: 'Date input with calendar',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/DatePicker.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/DatePicker.tsx',
   },
 
   // Phase 3 Batch 5 Components
@@ -3205,7 +3205,7 @@ const [date, setDate] = useState<Date | undefined>(new Date())
         description: '6-digit OTP input',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/InputOTP.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/InputOTP.tsx',
   },
 
   ResizablePanelGroup: {
@@ -3257,7 +3257,7 @@ const [date, setDate] = useState<Date | undefined>(new Date())
         description: 'Resizable panel layout',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Resizable.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Resizable.tsx',
   },
 
   // Aliases for navigation compatibility (kebab-case → PascalCase conversion)
@@ -3306,7 +3306,7 @@ const [date, setDate] = useState<Date | undefined>(new Date())
         description: '6-digit OTP input',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/InputOTP.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/InputOTP.tsx',
   },
 
   // "resizable" converts to "Resizable" but component is registered as "ResizablePanelGroup"
@@ -3359,7 +3359,7 @@ const [date, setDate] = useState<Date | undefined>(new Date())
         description: 'Resizable panel layout',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/Resizable.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/Resizable.tsx',
   },
 
   OpenGraphCard: {
@@ -3527,7 +3527,7 @@ export default function MyOGImage() {
         description: 'Pass theme colors explicitly for brand consistency',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/blocks/social/OpenGraphCard.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/blocks/social/OpenGraphCard.tsx',
   },
 
   // Phase 16 - Missing Components
@@ -3622,7 +3622,7 @@ export default function MyOGImage() {
         description: 'A responsive grid of stat cards',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/data-display/StatCard.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/data-display/StatCard.tsx',
     accessibilityNotes: [
       'Uses semantic <dl>/<dt>/<dd> for label/value pairs',
       'Trend conveyed via icon + color (not color alone)',
@@ -3694,7 +3694,7 @@ import { Plus } from 'lucide-react'
         description: 'Empty state with a call-to-action button',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/feedback/EmptyState.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/feedback/EmptyState.tsx',
     accessibilityNotes: [
       'Uses role="status" for screen reader announcements',
       'Semantic <h3> heading for title',
@@ -3734,7 +3734,7 @@ import { Plus } from 'lucide-react'
         description: 'A simple vertical timeline with status indicators',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/data-display/Timeline.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/data-display/Timeline.tsx',
     accessibilityNotes: [
       'Uses semantic <ol> for chronological order',
       'aria-current="step" on active item',
@@ -3798,7 +3798,7 @@ import { Plus } from 'lucide-react'
         description: 'A horizontal stepper with 3 steps',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/feedback/Stepper.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/feedback/Stepper.tsx',
     accessibilityNotes: [
       'Uses aria-label="Progress" on the root',
       'aria-current="step" on active step',
@@ -3880,7 +3880,7 @@ import { Plus } from 'lucide-react'
         description: 'File upload with type, size, and count validation',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/forms/FileUpload.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/forms/FileUpload.tsx',
     accessibilityNotes: [
       'Drop zone has role="button" for keyboard activation',
       'Keyboard activatable (Enter/Space to open file dialog)',
@@ -3958,7 +3958,7 @@ const [selected, setSelected] = useState('')
         description: 'Controlled expand and selection state',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/data-display/TreeView.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/data-display/TreeView.tsx',
     accessibilityNotes: [
       'Uses role="tree" and role="treeitem" per WAI-ARIA',
       'Full keyboard navigation (Arrow keys, Enter, Space)',
@@ -4037,7 +4037,7 @@ const notifications = [
         description: 'Notifications with inline action buttons',
       },
     ],
-    sourceUrl: 'https://github.com/shalomormsby/ecosystem/blob/main/packages/ui/src/components/overlays/NotificationCenter.tsx',
+    sourceUrl: 'https://github.com/shalomormsby/sage-design-engine/blob/main/packages/ui/src/components/overlays/NotificationCenter.tsx',
     accessibilityNotes: [
       'Trigger announces unread count to screen readers',
       'Panel uses role="dialog" with aria-label',

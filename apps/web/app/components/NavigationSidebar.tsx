@@ -218,7 +218,7 @@ export function NavigationSidebar({
         <SidebarFooter>
           {/* GitHub Link */}
           <a
-            href="https://github.com/shalomormsby/ecosystem/tree/main/design-system"
+            href="https://github.com/shalomormsby/sage-design-engine/tree/main/design-system"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-3 py-2 text-xs text-muted-foreground bg-muted/50 hover:bg-muted border border-border rounded-md transition-colors"

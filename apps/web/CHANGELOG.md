@@ -1173,5 +1173,5 @@ See `QUALITY_VERIFICATION_REPORT.md` for detailed testing checklists.
 
 ---
 
-[Unreleased]: https://github.com/shalomormsby/ecosystem/compare/v2.0.0...HEAD
-[2.0.0]: https://github.com/shalomormsby/ecosystem/releases/tag/v2.0.0
+[Unreleased]: https://github.com/shalomormsby/sage-design-engine/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/shalomormsby/sage-design-engine/releases/tag/v2.0.0

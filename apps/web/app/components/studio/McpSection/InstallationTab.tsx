@@ -151,7 +151,7 @@ yarn add -D @thesage/mcp`}
                         id="local-clone"
                         title="Clone Repository"
                         language="bash"
-                        code={`git clone https://github.com/shalomormsby/ecosystem.git
+                        code={`git clone https://github.com/shalomormsby/sage-design-engine.git
 cd ecosystem`}
                         defaultCollapsed={false}
                         showCopy={true}

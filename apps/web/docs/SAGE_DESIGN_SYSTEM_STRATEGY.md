@@ -705,7 +705,7 @@ Navigate to the component and verify:
 
 ```bash
 # Root directory
-cd /Users/shalomormsby/Developer/work/ecosystem
+cd <repo-root>
 
 # Rebuild all packages
 pnpm build
@@ -959,7 +959,7 @@ The Model Context Protocol (MCP) is an open standard for connecting AI assistant
 
 **2026-01-14 - MCP Server Configured in Claude Desktop**
 - Added @thesage/mcp to Claude Desktop config at `~/Library/Application Support/Claude/claude_desktop_config.json`
-- Configuration uses local path: `node /Users/shalomormsby/Developer/work/ecosystem/packages/sds-mcp-server/dist/index.js`
+- Configuration uses local path: `node <repo-root>/packages/sds-mcp-server/dist/index.js`
 - Enables Claude Desktop to browse, search, and get installation instructions for all 48 Sage UI components
 - Verified MCP server functionality with all four tools working
 
@@ -1071,7 +1071,7 @@ The Model Context Protocol (MCP) is an open standard for connecting AI assistant
 - **Zod:** https://zod.dev/
 
 ### Internal Resources
-- **GitHub:** https://github.com/shalomormsby/ecosystem
+- **GitHub:** https://github.com/shalomormsby/sage-design-engine
 - **Studio (dev):** http://localhost:3001
 - **Vercel (prod):** [URL TBD]
 
