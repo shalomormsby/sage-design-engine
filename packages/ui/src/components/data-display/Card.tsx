@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "../../lib/utils"
 
 const cardVariants = cva(
-    "rounded-2xl border bg-surface text-foreground shadow-sm",
+    "rounded-2xl border bg-surface text-foreground shadow-xs",
     {
         variants: {
             hoverEffect: {

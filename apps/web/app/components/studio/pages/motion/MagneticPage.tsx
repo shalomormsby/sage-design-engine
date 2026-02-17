@@ -56,7 +56,7 @@ export function MagneticPage() {
 
                         {/* Icon Button */}
                         <Magnetic strength={strength * 2} range={range}>
-                            <div className="w-16 h-16 rounded-full bg-[var(--color-surface)] border border-[var(--color-border)] flex items-center justify-center shadow-sm cursor-pointer hover:border-[var(--color-primary)] transition-colors">
+                            <div className="w-16 h-16 rounded-full bg-[var(--color-surface)] border border-[var(--color-border)] flex items-center justify-center shadow-xs cursor-pointer hover:border-[var(--color-primary)] transition-colors">
                                 <Mail className="w-6 h-6" />
                             </div>
                         </Magnetic>

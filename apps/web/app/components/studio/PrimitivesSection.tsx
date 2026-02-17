@@ -258,7 +258,7 @@ export function PrimitivesSection() {
 
             {/* Code Snippet */}
             <div className="absolute top-8 right-8 left-8 flex justify-center pointer-events-none">
-              <div className="bg-[var(--color-surface)]/90 backdrop-blur border border-[var(--color-border)] rounded-full px-4 py-2 font-mono text-xs text-[var(--color-text-secondary)] shadow-sm">
+              <div className="bg-[var(--color-surface)]/90 backdrop-blur border border-[var(--color-border)] rounded-full px-4 py-2 font-mono text-xs text-[var(--color-text-secondary)] shadow-xs">
                 duration: {safeDurationTokens[activeDuration]} • ease: {activeEasing} {isLooping && `• delay: ${loopDelay}s`}
               </div>
             </div>

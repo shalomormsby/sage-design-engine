@@ -236,7 +236,7 @@ function FileUpload({
                   e.stopPropagation()
                   removeFile(index)
                 }}
-                className="shrink-0 rounded-sm p-1 text-foreground-secondary hover:text-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="shrink-0 rounded-xs p-1 text-foreground-secondary hover:text-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 aria-label={`Remove ${file.name}`}
               >
                 <XIcon />

@@ -162,55 +162,237 @@ Speedboat V2 does not currently have a dark mode specification. Two options:
 
 > **Why:** SDE is pinned to Tailwind CSS v3.4. Tailwind v4 has been stable since early 2025 and is the default for new projects. Every new Speedboat app would naturally use v4. Staying on v3 creates compounding tech debt — the config format, directives, and plugin system are all different.
 
-### Current State
+### Prerequisite: Delete `apps/mobile`
 
-- `packages/ui/package.json` devDependency: `"tailwindcss": "^3.4.0"` (line 255)
-- `apps/web/package.json` devDependency: `"tailwindcss": "^3.4.17"` (line 47)
-- `packages/config/tailwind/index.js` uses v3 format: `module.exports = { theme: { extend: ... } }` with plugin arrays
-- `packages/ui/src/globals.css` uses v3 directives: `@tailwind base; @tailwind components; @tailwind utilities;`
+The `apps/mobile` experiment (NativeWind + Expo) is abandoned. It's a single-screen PoC with no routes and no original logic. NativeWind v4 (stable) does **not** support Tailwind v4, and NativeWind v5 targeting v4 is pre-release with no stable timeline. Deleting the app removes the only Tailwind v3 hard blocker in the monorepo.
 
-### What Changes in Tailwind v4
+**Action:** `rm -rf apps/mobile` and remove any references to it in the root `pnpm-workspace.yaml` or Turborepo config.
 
-| v3 | v4 |
-|---|---|
-| `tailwind.config.js` (JS) | `@config` in CSS or `tailwind.config.ts` |
-| `@tailwind base/components/utilities` | `@import "tailwindcss"` |
-| `module.exports = { ... }` | CSS-first configuration with `@theme` |
-| PostCSS plugin | Built-in Vite plugin or PostCSS plugin v4 |
-| `darkMode: 'class'` | `@variant dark (&:where(.dark, .dark *))` or automatic |
-| Plugin functions | CSS-based extensions |
+### Current State (Verified Feb 2026)
+
+**Tailwind versions across the monorepo:**
+| Package | Version | Type |
+|---|---|---|
+| `packages/ui` | `"tailwindcss": "^3.4.0"` | devDependency |
+| `apps/web` | `"tailwindcss": "^3.4.17"` | devDependency |
+| `apps/portfolio` | `"tailwindcss": "3"` | devDependency |
+| `apps/creative-powerup` | `"tailwindcss": "^3.4.15"` | devDependency |
+
+**tailwind-merge versions (critical — must upgrade simultaneously):**
+| Package | Version | Notes |
+|---|---|---|
+| `packages/ui` | `"tailwind-merge": "^2.2.0"` | Used by `cn()` in `packages/ui/src/lib/utils.ts` |
+| `packages/charts` | `"tailwind-merge": "^3.4.0"` | Already on v3 — no change needed |
+
+**Shared Tailwind preset:** `packages/config/tailwind/index.js` — v3 `module.exports` format. All apps import via `presets: [require('@thesage/config/tailwind')]`.
+
+**CSS entry points using `@tailwind` directives:**
+- `packages/ui/src/globals.css`
+- `apps/portfolio/app/globals.css`
+- `apps/creative-powerup/app/globals.css`
+- `templates/nextjs-app/app/globals.css`
+
+**`@apply` usage (must remain functional):**
+- `packages/ui/src/globals.css`: `@apply bg-background text-foreground` and `@apply border-border` in `@layer base`
+- `apps/creative-powerup/app/globals.css`: Same plus `@apply rounded-lg overflow-x-auto` and `@apply font-mono text-sm` in custom layers
+
+**Custom `@layer utilities` blocks (must convert to `@utility` in v4):**
+- `apps/portfolio/app/globals.css`: `.text-balance`, `.font-heading`, `.font-body`, `.font-mono`
+- `apps/creative-powerup/app/globals.css`: Similar font utilities
+
+**Content paths (each app explicitly includes UI package source):**
+- Portfolio: `path.join(__dirname, "../../packages/ui/src/**/*.{js,ts,jsx,tsx}")`
+- Creative Powerup: Same pattern
+- Template: `"./node_modules/@thesage/ui/dist/**/*.{js,mjs}"` (consumer path)
+
+**PostCSS configs (all identical pattern):**
+- `apps/portfolio/postcss.config.mjs` — `{ tailwindcss: {}, autoprefixer: {} }`
+- `apps/creative-powerup/postcss.config.js` — same
+- `templates/nextjs-app/postcss.config.js` — same
+
+**Dark mode:** All apps use `darkMode: 'class'` in their tailwind config. ThemeProvider adds/removes `.dark` class on document root.
+
+**No Tailwind plugins** are used in any config. No `tailwindcss-animate`.
+
+**CVA (class-variance-authority):** Used across components. CVA is Tailwind-version-agnostic — it concatenates class strings and has no Tailwind dependency. No CVA changes needed.
+
+### What Changes in Tailwind v4 (Detailed)
+
+| v3 | v4 | Impact |
+|---|---|---|
+| `@tailwind base; @tailwind components; @tailwind utilities;` | `@import "tailwindcss";` | Mechanical replacement in all CSS files |
+| `tailwind.config.js` with `module.exports` | CSS-first with `@theme` directive, or load legacy config via `@config "..."` | Shared preset needs decision (see below) |
+| `colors: { primary: 'var(--color-primary)' }` in JS config | `@theme inline { --color-primary: var(--color-primary); }` in CSS | **`inline` keyword is critical** — without it, Tailwind generates intermediate variables that break runtime theme switching |
+| `darkMode: 'class'` in JS config | `@custom-variant dark (&:where(.dark, .dark *));` in CSS | Must add to every CSS entry point |
+| `content: ['./src/**/*.{ts,tsx}']` in JS config | Auto-detection + `@source` directive for monorepo paths | `@source "../../packages/ui/src";` in each app's CSS |
+| `@layer utilities { .custom { ... } }` | `@utility custom { ... }` | Only needed for portfolio/creative-powerup custom utilities |
+| `@layer base { @apply ... }` | Still works — `@layer base` becomes a real CSS cascade layer | `@apply` is supported in v4; no changes to existing `@layer base` blocks |
+| PostCSS: `{ tailwindcss: {}, autoprefixer: {} }` | `{ "@tailwindcss/postcss": {} }` (autoprefixer bundled) | Update all PostCSS configs |
+| `tailwind-merge` v2.x | `tailwind-merge` v3.x required | Breaking: config restructured, validators renamed, theme scale keys changed |
+
+**Utility renames in v4 (update in component source + CVA definitions):**
+- `shadow-sm` → `shadow-xs`, `shadow` → `shadow-sm` (shifted scale)
+- `ring` → `ring-3` (ring now requires explicit width)
+- `!bg-red-500` → `bg-red-500!` (important modifier moved to suffix)
+- `blur-sm` → `blur-xs`, `blur` → `blur-sm` (shifted scale)
+- `rounded-sm` → `rounded-xs`, `rounded` → `rounded-sm` (shifted scale)
+
+**Browser support floor raised:** Safari 16.4+, Chrome 111+, Firefox 128+. Not a concern for Speedboat's internal tools.
+
+### Shared Preset Strategy Decision
+
+The shared preset at `packages/config/tailwind/index.js` defines all semantic color tokens, font families, border radii, and Radix keyframe animations. Two migration paths:
+
+**Option A: Keep JS preset, load via `@config` (recommended for initial migration)**
+- Each app's CSS adds `@config "../../packages/config/tailwind/index.js";`
+- Preset file stays as-is (v3 format works with `@config`)
+- Fastest path, lowest risk, easy to verify
+- Downside: not "v4 native" — feels like a compatibility shim
+
+**Option B: Convert preset to shared CSS file**
+- Create `packages/config/tailwind/base.css` with `@theme inline { ... }` definitions
+- Each app imports it: `@import "../../packages/config/tailwind/base.css";`
+- Full v4 native approach
+- More work, but cleaner long-term
+
+**Recommendation:** Start with Option A to get everything building, then convert to Option B as a follow-up if desired.
 
 ### Files to Modify
 
+**Step 0: Cleanup**
+| File/Dir | Change |
+|---|---|
+| `apps/mobile/` | **DELETE** — abandoned NativeWind experiment |
+| `pnpm-workspace.yaml` / `turbo.json` | Remove `apps/mobile` references if present |
+
+**Step 1: Package upgrades**
 | File | Change |
 |---|---|
-| `packages/ui/package.json` | `tailwindcss` ^3.4.0 → ^4.0.0 |
-| `packages/config/tailwind/index.js` | Rewrite to v4 CSS-first format or provide a v4-compatible preset |
-| `packages/ui/src/globals.css` | Replace `@tailwind` directives with `@import "tailwindcss"` |
-| `apps/web/package.json` | `tailwindcss` ^3.4.17 → ^4.0.0 |
-| `apps/web/tailwind.config.ts` | Migrate to v4 format |
-| `apps/web/postcss.config.js` | Update PostCSS plugin if needed |
-| `templates/nextjs-app/tailwind.config.ts` | Migrate starter template |
-| `templates/nextjs-app/postcss.config.js` | Update |
+| `packages/ui/package.json` | `tailwindcss` ^3.4.0 → ^4.0.0, `tailwind-merge` ^2.2.0 → ^3.0.0, add `@tailwindcss/postcss` as devDep |
+| `apps/web/package.json` | `tailwindcss` ^3.4.17 → ^4.0.0, replace `autoprefixer` with `@tailwindcss/postcss` |
+| `apps/portfolio/package.json` | `tailwindcss` 3 → ^4.0.0, replace `autoprefixer` with `@tailwindcss/postcss` |
+| `apps/creative-powerup/package.json` | `tailwindcss` ^3.4.15 → ^4.0.0, replace `autoprefixer` with `@tailwindcss/postcss` |
+| `templates/nextjs-app/package.json` | Update tailwindcss + postcss deps |
+
+**Step 2: PostCSS configs**
+| File | Change |
+|---|---|
+| `apps/portfolio/postcss.config.mjs` | `{ tailwindcss: {}, autoprefixer: {} }` → `{ "@tailwindcss/postcss": {} }` |
+| `apps/creative-powerup/postcss.config.js` | Same |
+| `apps/web/postcss.config.js` | Same |
+| `templates/nextjs-app/postcss.config.js` | Same |
+
+**Step 3: CSS entry points**
+| File | Changes |
+|---|---|
+| `packages/ui/src/globals.css` | Replace `@tailwind base/components/utilities` with `@import "tailwindcss"`. Add `@config "../../config/tailwind/index.js";`. Add `@custom-variant dark (&:where(.dark, .dark *));` |
+| `apps/portfolio/app/globals.css` | Same pattern. Add `@source "../../packages/ui/src";`. Convert `@layer utilities` custom classes to `@utility` directives |
+| `apps/creative-powerup/app/globals.css` | Same pattern |
+| `apps/web/app/globals.css` (or equivalent) | Same pattern |
+| `templates/nextjs-app/app/globals.css` | Replace directives. Add `@source "../node_modules/@thesage/ui/dist";` |
+
+**Step 4: Remove Tailwind config files (if using `@config` in CSS)**
+| File | Change |
+|---|---|
+| `packages/ui/tailwind.config.js` | Can be removed — `@config` in CSS replaces it |
+| `apps/portfolio/tailwind.config.ts` | Can be removed — config loaded via CSS `@config` + `@source` directives |
+| `apps/creative-powerup/tailwind.config.ts` | Same |
+| `apps/web/tailwind.config.ts` | Same |
+| `templates/nextjs-app/tailwind.config.ts` | Convert to inline `@theme` for template simplicity, or keep with `@config` |
+
+**Step 5: Utility renames across component source**
+| Scope | Change |
+|---|---|
+| All files in `packages/ui/src/components/` | Run `npx @tailwindcss/upgrade` first. Then manually verify: `shadow-sm`→`shadow-xs`, `ring`→`ring-3`, important prefix→suffix, blur/rounded scale shifts |
+| CVA variant definitions (7 exports) | Same renames in string literals: `buttonVariants`, `toggleVariants`, `badgeVariants`, `cardVariants`, `sheetVariants`, `labelVariants`, `alertVariants` |
+
+**Step 6: tailwind-merge v3 migration**
+| File | Change |
+|---|---|
+| `packages/ui/src/lib/utils.ts` | `cn()` uses `twMerge(clsx(...))` — verify behavior unchanged after tailwind-merge v3 upgrade. No code change expected unless custom twMerge config exists (it doesn't). |
+
+### Migration Tool
+
+Tailwind provides an official upgrade tool: `npx @tailwindcss/upgrade` (requires Node.js 20+).
+
+**What it does automatically:**
+- Updates `tailwindcss` dependency to v4
+- Installs `@tailwindcss/postcss` or `@tailwindcss/vite`
+- Removes `postcss-import` and `autoprefixer`
+- Converts `@tailwind` directives to `@import "tailwindcss"`
+- Migrates `tailwind.config.js` theme values to `@theme` CSS directives
+- Updates renamed utility classes in templates
+- Converts `@layer utilities { }` to `@utility` directives
+- Updates PostCSS config
+
+**What it does NOT handle well:**
+- CSS variable references in theme config (the `inline` keyword)
+- Monorepo `@source` directives
+- `@custom-variant dark` for class-based dark mode
+- tailwind-merge version bump
+- Visual verification of 99 components
+
+**Recommendation:** Run the tool first on an isolated branch, then manually fix what it misses.
+
+### Critical Gotcha: `@theme inline` for Runtime Theming
+
+SDE's entire theme system works by ThemeProvider injecting CSS variables onto `:root` at runtime. In v4, the `@theme inline` keyword is **mandatory** for this pattern.
+
+```css
+/* CORRECT — utilities embed var() directly */
+@theme inline {
+  --color-primary: var(--color-primary);
+  --color-background: var(--color-background);
+}
+/* Generated: .bg-primary { background-color: var(--color-primary) } */
+
+/* WRONG — utilities reference intermediate theme variable */
+@theme {
+  --color-primary: var(--color-primary);
+}
+/* Generated: .bg-primary { background-color: var(--theme-color-primary) } — breaks runtime switching */
+```
+
+If using Option A (`@config` to load the JS preset), the config's `theme.extend.colors` values are treated as inline by default because they're string references, not static values. **Verify this behavior during migration** — if theme switching breaks, the `inline` keyword is the fix.
 
 ### Acceptance Criteria
 
-- [ ] All SDE packages build with Tailwind v4
-- [ ] `pnpm build` passes for all workspace packages
+- [ ] `apps/mobile` deleted, no references remain in workspace config
+- [ ] All packages install cleanly with `pnpm install`
+- [ ] `pnpm build` passes for `@thesage/ui`, `apps/web`, `apps/portfolio`, `apps/creative-powerup`
 - [ ] `pnpm test` passes (156 tests)
-- [ ] All CSS variable tokens still work (runtime theme switching)
-- [ ] `globals.css` uses v4 import syntax
-- [ ] Consumer apps can use v4's CSS-first config format
-- [ ] Dark mode toggle still works via class strategy
+- [ ] `globals.css` files use `@import "tailwindcss"` (no `@tailwind` directives)
+- [ ] PostCSS configs use `@tailwindcss/postcss` (no `autoprefixer`)
+- [ ] Runtime theme switching works: Studio/Terra/Volt × light/dark (6 combinations verified visually)
+- [ ] Dark mode toggle works via `.dark` class strategy
+- [ ] `cn()` utility produces correct merged classes (tailwind-merge v3)
 - [ ] Bundle size does not regress beyond current size-limit budgets
+- [ ] Consumer template (`templates/nextjs-app`) builds and renders correctly
+- [ ] No visual regressions in high-usage components: Button, Card, Input, Dialog, DataTable, Sidebar, Tabs, Badge
 
-### Risk
+### Risk Assessment
 
-High — Tailwind v4 is a significant breaking change. May require updating CVA patterns, `cn()` utility behavior, and Tailwind Merge compatibility. Should be done in an isolated branch with thorough testing.
+**Overall risk: Medium-High.** Reduced from original "High" assessment because the NativeWind blocker is removed.
+
+**Remaining risks:**
+1. **tailwind-merge v3 behavior changes** could subtly affect class conflict resolution in components that rely on `cn()` — verify visually (Medium)
+2. **`@theme inline` correctness** for runtime theme switching — the most critical single point of failure; test all 6 theme×mode combinations (Medium-High)
+3. **Utility renames** across 99 components — the upgrade tool catches most but manual review needed for CVA string literals (Low-Medium)
+4. **Next.js 16 + Tailwind v4.1.x + Turbopack** has known build failures — pin to v4.0.x initially (Low)
+
+**Not at risk:**
+- CVA — version-agnostic, no changes needed to the library
+- Framer Motion — no Tailwind dependency
+- Radix UI — no Tailwind dependency
+- Zustand theme store — no Tailwind dependency
+- ThemeProvider CSS variable injection — framework-independent
 
 ### Estimated Effort
 
-2-3 focused sessions. The config migration is mechanical but every component's Tailwind classes need verification.
+2-3 focused sessions:
+1. **Session 1:** Delete mobile app, run upgrade tool, fix PostCSS/CSS configs, upgrade tailwind-merge, get builds passing
+2. **Session 2:** Verify runtime theme switching, fix `@theme inline` if needed, verify utility renames, run tests
+3. **Session 3 (if needed):** Visual verification of components, fix edge cases, update template
 
 ---
 

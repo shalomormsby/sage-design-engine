@@ -138,7 +138,7 @@ export const Header = (
     // Unscrolled: Transparent & Borderless (looks printed on background), but with blur for "liquid" feel over Orb
     // Scrolled: Wetter glass, more opaque, shadow for depth, no harsh borders
     const backgroundStyles = hasScrolled && glassOnScroll
-        ? 'backdrop-blur-3xl bg-[var(--color-surface)]/60 border-b border-transparent shadow-sm supports-[backdrop-filter]:bg-[var(--color-surface)]/50'
+        ? 'backdrop-blur-3xl bg-[var(--color-surface)]/60 border-b border-transparent shadow-xs supports-[backdrop-filter]:bg-[var(--color-surface)]/50'
         : 'bg-transparent border-b border-transparent backdrop-blur-xl';
 
     // Nav Alignment Classes
@@ -198,7 +198,7 @@ export const Header = (
                                                         focus-visible:outline-2
                                                         focus-visible:outline-offset-4
                                                         focus-visible:outline-[var(--color-focus)]
-                                                        rounded-sm
+                                                        rounded-xs
                                                         ${shouldAnimate ? 'transition-colors' : ''}
                                                         ${link.active
                                                             ? 'text-[var(--color-text-primary)] font-medium after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[var(--color-primary)] after:rounded-full'
@@ -322,7 +322,7 @@ export const Header = (
                                                 focus-visible:outline-2
                                                 focus-visible:outline-offset-4
                                                 focus-visible:outline-[var(--color-focus)]
-                                                rounded-sm
+                                                rounded-xs
                                                 ${shouldAnimate ? 'transition-all' : ''}
                                                 ${link.active
                                                     ? 'text-[var(--color-primary)] font-semibold'
@@ -356,7 +356,7 @@ export const Header = (
                                                             focus-visible:outline-2
                                                             focus-visible:outline-offset-4
                                                             focus-visible:outline-[var(--color-focus)]
-                                                            rounded-sm
+                                                            rounded-xs
                                                             ${shouldAnimate ? 'transition-colors' : ''}
                                                             ${child.active
                                                                 ? 'text-[var(--color-primary)] font-medium'
@@ -387,7 +387,7 @@ export const Header = (
                                         focus-visible:outline-2
                                         focus-visible:outline-offset-4
                                         focus-visible:outline-[var(--color-focus)]
-                                        rounded-sm
+                                        rounded-xs
                                         ${shouldAnimate ? 'transition-all' : ''}
                                         ${link.active
                                             ? 'text-[var(--color-primary)] font-semibold'

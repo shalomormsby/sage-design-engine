@@ -172,7 +172,7 @@ const [tasks, setTasks] = useState([
                   flex items-center gap-3 p-4 bg-[var(--color-surface)]
                   border border-[var(--color-border)] rounded-lg
                   transition-shadow
-                  ${isDragging ? 'shadow-lg ring-2 ring-[var(--color-primary)]' : 'hover:shadow-sm'}
+                  ${isDragging ? 'shadow-lg ring-2 ring-[var(--color-primary)]' : 'hover:shadow-xs'}
                 `}
               >
                 <DragDropHandle />

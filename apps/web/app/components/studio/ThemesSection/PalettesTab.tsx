@@ -394,7 +394,7 @@ export function PalettesTab() {
                 {/* Primary */}
                 <div className="flex items-center gap-2">
                   <div
-                    className="w-8 h-8 rounded-full border shadow-sm ring-1 ring-[var(--color-border)]"
+                    className="w-8 h-8 rounded-full border shadow-xs ring-1 ring-[var(--color-border)]"
                     style={{ backgroundColor: currentPalette.primary }}
                   />
                   <div className="flex flex-col">
@@ -406,7 +406,7 @@ export function PalettesTab() {
                 {/* Secondary */}
                 <div className="flex items-center gap-2">
                   <div
-                    className="w-8 h-8 rounded-full border shadow-sm ring-1 ring-[var(--color-border)]"
+                    className="w-8 h-8 rounded-full border shadow-xs ring-1 ring-[var(--color-border)]"
                     style={{ backgroundColor: currentPalette.secondary || currentPalette.primary }}
                   />
                   <div className="flex flex-col">
@@ -418,7 +418,7 @@ export function PalettesTab() {
                 {/* Accent */}
                 <div className="flex items-center gap-2">
                   <div
-                    className="w-8 h-8 rounded-full border shadow-sm ring-1 ring-[var(--color-border)]"
+                    className="w-8 h-8 rounded-full border shadow-xs ring-1 ring-[var(--color-border)]"
                     style={{ backgroundColor: currentPalette.accent || currentPalette.primary }}
                   />
                   <div className="flex flex-col">

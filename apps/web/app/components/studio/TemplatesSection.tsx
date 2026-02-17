@@ -182,7 +182,7 @@ function PageTemplateContent() {
           </div>
 
           {/* Overlay */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-[var(--color-background)]/60 backdrop-blur-sm">
+          <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-[var(--color-background)]/60 backdrop-blur-xs">
             <div className="max-w-md space-y-6 p-8 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] shadow-xl">
               <div className="flex justify-center mb-2">
                 <Layout className="w-12 h-12 text-[var(--color-primary)]" strokeWidth={1.5} />

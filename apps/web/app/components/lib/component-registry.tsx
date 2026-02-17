@@ -944,7 +944,7 @@ export default function AppSidebar() {
         title: 'Loading Overlay',
         code: `<div className="relative min-h-[200px]">
   {isLoading && (
-    <div className="absolute inset-0 flex items-center justify-center bg-[var(--color-background)]/80 backdrop-blur-sm">
+    <div className="absolute inset-0 flex items-center justify-center bg-[var(--color-background)]/80 backdrop-blur-xs">
       <Spinner size="lg" />
     </div>
   )}

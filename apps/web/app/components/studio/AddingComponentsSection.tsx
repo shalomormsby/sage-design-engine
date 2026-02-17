@@ -33,7 +33,7 @@ export function AddingComponentsSection({ breadcrumbs, activeItemId }: AddingCom
       </div>
 
       {/* Secondary Navigation - Sticky below header */}
-      <div className="sticky top-0 z-30 bg-[var(--color-background)]/95 backdrop-blur-sm pt-4 pb-4 -mx-6 px-6 sm:-mx-8 sm:px-8 mb-8 border-b border-[var(--color-border)]">
+      <div className="sticky top-0 z-30 bg-[var(--color-background)]/95 backdrop-blur-xs pt-4 pb-4 -mx-6 px-6 sm:-mx-8 sm:px-8 mb-8 border-b border-[var(--color-border)]">
         <div className="flex overflow-x-auto no-scrollbar gap-1 custom-scrollbar">
           {[
             { id: 'methodology', label: 'Methodology' },
