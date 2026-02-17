@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.12 - 2026-02-17
+
+### Patch Changes
+
+- Updated dependencies [cca136a]
+  - @thesage/ui@1.2.0
+
 ## 0.1.11 - 2026-02-16
 
 ### Patch Changes
