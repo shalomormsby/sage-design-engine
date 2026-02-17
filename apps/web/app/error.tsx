@@ -70,7 +70,7 @@ export default function Error({
             </div>
 
             {/* Typewriter Message Container */}
-            <div className="bg-black border border-white/20 p-6 rounded-lg shadow-[0_0_30px_rgba(0,0,0,0.5)] backdrop-blur-sm relative z-20">
+            <div className="bg-black border border-white/20 p-6 rounded-lg shadow-[0_0_30px_rgba(0,0,0,0.5)] backdrop-blur-xs relative z-20">
               <div
                 className="min-h-[60px] flex items-center justify-center"
                 style={{ fontFamily: 'var(--font-jetbrains-mono)' }}
@@ -138,7 +138,7 @@ export default function Error({
       {/* Footer */}
       <div className="relative z-10 w-full pointer-events-auto">
         <Footer
-          className="bg-black/50 backdrop-blur-sm border-white/10"
+          className="bg-black/50 backdrop-blur-xs border-white/10"
           copyright="© 2026 Sage Design Engine. All rights reserved."
           sections={[
             {

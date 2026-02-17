@@ -41,7 +41,7 @@ export const COMPONENT_CATEGORIES: Section[] = [
 export const SECTION_ITEMS: Record<string, string[]> = {
   'adding-components': ['methodology', 'modifying', 'troubleshooting'],
   'mcp-server': ['installation', 'tools', 'usage', 'troubleshooting'],
-  tokens: ['colors', 'typography', 'spacing', 'syntax', 'motion'],
+  tokens: ['foundations', 'colors', 'typography', 'spacing', 'syntax', 'motion'],
   themes: ['palettes', 'customizer'],
   actions: ['button', 'toggle', 'toggle-group'],
   forms: [
@@ -114,6 +114,7 @@ export const routeConfig: RouteConfig = {
   tokens: {
     label: 'Design Tokens',
     children: {
+      foundations: { label: 'Foundations' },
       colors: { label: 'Colors' },
       typography: { label: 'Typography' },
       spacing: { label: 'Spacing' },

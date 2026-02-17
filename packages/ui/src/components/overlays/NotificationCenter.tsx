@@ -257,7 +257,7 @@ function NotificationCenter({
                 .filter(group => grouped[group]?.length > 0)
                 .map(group => (
                   <div key={group}>
-                    <div className="sticky top-0 bg-popover/95 backdrop-blur-sm px-4 py-1.5 border-b border-border/50">
+                    <div className="sticky top-0 bg-popover/95 backdrop-blur-xs px-4 py-1.5 border-b border-border/50">
                       <span className="text-[11px] font-medium uppercase tracking-wider text-foreground-secondary">
                         {group}
                       </span>
@@ -329,7 +329,7 @@ function NotificationCenter({
                                 e.stopPropagation()
                                 onMarkRead(notification.id)
                               }}
-                              className="rounded-sm p-1 text-foreground-secondary hover:text-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                              className="rounded-xs p-1 text-foreground-secondary hover:text-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
                               aria-label={`Mark "${notification.title}" as read`}
                             >
                               <CheckIcon />
@@ -342,7 +342,7 @@ function NotificationCenter({
                                 e.stopPropagation()
                                 onDismiss(notification.id)
                               }}
-                              className="rounded-sm p-1 text-foreground-secondary hover:text-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                              className="rounded-xs p-1 text-foreground-secondary hover:text-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
                               aria-label={`Dismiss "${notification.title}"`}
                             >
                               <XIcon />

@@ -223,7 +223,7 @@ export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({
                     flex-1 py-2 px-3 rounded-md
                     transition-all duration-200
                     ${mode === 'light'
-                      ? 'bg-[var(--color-primary)] text-[var(--color-primary-foreground)] shadow-sm'
+                      ? 'bg-[var(--color-primary)] text-[var(--color-primary-foreground)] shadow-xs'
                       : 'bg-[var(--color-background)] border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:bg-[var(--color-hover)]'
                     }
                   `}
@@ -236,7 +236,7 @@ export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({
                     flex-1 py-2 px-3 rounded-md
                     transition-all duration-200
                     ${mode === 'dark'
-                      ? 'bg-[var(--color-primary)] text-[var(--color-primary-foreground)] shadow-sm'
+                      ? 'bg-[var(--color-primary)] text-[var(--color-primary-foreground)] shadow-xs'
                       : 'bg-[var(--color-background)] border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:bg-[var(--color-hover)]'
                     }
                   `}

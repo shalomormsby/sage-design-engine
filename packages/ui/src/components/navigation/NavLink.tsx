@@ -25,7 +25,7 @@ export const NavLink = (
          ${active
                 ? 'bg-[var(--color-primary)]/10 text-[var(--color-primary)]'
                 : 'text-[var(--color-text-secondary)] hover:bg-[var(--color-hover)] hover:text-[var(--color-text-primary)]'}`,
-        minimal: `relative pb-1 rounded-sm
+        minimal: `relative pb-1 rounded-xs
            ${active
                 ? 'text-[var(--color-text-primary)] font-medium after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[var(--color-primary)] after:rounded-full'
                 : 'text-[var(--color-text-secondary)] hover:text-[var(--color-primary)]'}`

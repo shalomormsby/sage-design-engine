@@ -81,7 +81,7 @@ function OverviewCustomizerPreview() {
                   <button
                     key={t.id}
                     onClick={() => setDemoTheme(t.id)}
-                    className={`px-2 py-1.5 rounded text-xs flex items-center justify-center border transition-all ${demoTheme === t.id ? 'shadow-sm' : 'opacity-60 hover:opacity-100'
+                    className={`px-2 py-1.5 rounded text-xs flex items-center justify-center border transition-all ${demoTheme === t.id ? 'shadow-xs' : 'opacity-60 hover:opacity-100'
                       }`}
                     style={demoTheme === t.id ? {
                       backgroundColor: 'var(--color-primary)',
@@ -105,7 +105,7 @@ function OverviewCustomizerPreview() {
                   <button
                     key={m.id}
                     onClick={() => setDemoMode(m.id)}
-                    className={`px-2 py-1.5 rounded text-xs flex items-center justify-center gap-1 border transition-all ${demoMode === m.id ? 'shadow-sm' : 'opacity-60 hover:opacity-100'
+                    className={`px-2 py-1.5 rounded text-xs flex items-center justify-center gap-1 border transition-all ${demoMode === m.id ? 'shadow-xs' : 'opacity-60 hover:opacity-100'
                       }`}
                     style={demoMode === m.id ? {
                       backgroundColor: 'var(--color-primary)',

@@ -250,7 +250,7 @@ console.log(result); // 55`}
                           className={`
                             px-3 py-1.5 rounded-md text-xs font-medium transition-all
                             ${props[propName] === 'all'
-                              ? 'bg-[var(--color-primary)] text-[var(--color-primary-foreground)] shadow-sm'
+                              ? 'bg-[var(--color-primary)] text-[var(--color-primary-foreground)] shadow-xs'
                               : 'bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:border-[var(--color-primary)]'
                             }
                           `}
@@ -265,7 +265,7 @@ console.log(result); // 55`}
                           className={`
                             px-3 py-1.5 rounded-md text-xs font-medium transition-all
                             ${props[propName] === option
-                              ? 'bg-[var(--color-primary)] text-[var(--color-primary-foreground)] shadow-sm'
+                              ? 'bg-[var(--color-primary)] text-[var(--color-primary-foreground)] shadow-xs'
                               : componentName === 'Code' && propName === 'syntax' && props[propName] === 'all'
                                 ? 'bg-[var(--color-surface)] text-[var(--color-text-muted)] opacity-50 border border-[var(--color-border)]'
                                 : 'bg-[var(--color-surface)] text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:border-[var(--color-primary)]'

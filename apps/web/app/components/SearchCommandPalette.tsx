@@ -92,7 +92,7 @@ export function SearchCommandPalette({ onNavigate, isOpen, onClose }: SearchComm
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/50 z-[100] backdrop-blur-sm"
+        className="fixed inset-0 bg-black/50 z-[100] backdrop-blur-xs"
         onClick={() => {
           onClose();
           setQuery('');

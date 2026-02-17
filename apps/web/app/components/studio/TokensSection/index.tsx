@@ -11,7 +11,7 @@ import { SyntaxTab } from './SyntaxTab';
 import { InteractionsTab } from './InteractionsTab';
 import { DesignTokensOverview } from '../DesignTokensOverview';
 
-type TokenTab = 'tokens-overview' | 'brand' | 'colors' | 'typography' | 'spacing' | 'syntax' | 'motion' | 'interactions';
+type TokenTab = 'tokens-overview' | 'foundations' | 'brand' | 'colors' | 'typography' | 'spacing' | 'syntax' | 'motion' | 'interactions';
 
 interface TokensSectionProps {
   activeItemId?: string;
@@ -24,7 +24,7 @@ export function TokensSection({ activeItemId, breadcrumbs, onItemChange }: Token
 
   // Update active tab when activeItemId changes
   useEffect(() => {
-    if (activeItemId && ['brand', 'colors', 'typography', 'spacing', 'syntax', 'motion', 'interactions'].includes(activeItemId)) {
+    if (activeItemId && ['foundations', 'brand', 'colors', 'typography', 'spacing', 'syntax', 'motion', 'interactions'].includes(activeItemId)) {
       setActiveTab(activeItemId as TokenTab);
     } else if (!activeItemId || activeItemId === 'tokens') {
       setActiveTab('tokens-overview');
@@ -61,7 +61,7 @@ export function TokensSection({ activeItemId, breadcrumbs, onItemChange }: Token
 
       {/* Tab Content with spacing for sticky nav */}
       <div className="mt-4">
-        {activeTab === 'tokens-overview' && <DesignTokensOverview onNavigate={handleTabChange} />}
+        {(activeTab === 'tokens-overview' || activeTab === 'foundations') && <DesignTokensOverview onNavigate={handleTabChange} />}
         {activeTab === 'brand' && <BrandTab />}
         {activeTab === 'colors' && <ColorsTab />}
         {activeTab === 'typography' && <TypographyTab />}

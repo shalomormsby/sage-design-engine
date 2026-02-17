@@ -22,7 +22,7 @@ function Skeleton({ className, variant = "default", width, height, style, ...pro
     default: "rounded-md",
     circular: "rounded-full",
     rectangular: "rounded-none",
-    text: "rounded-sm h-4",
+    text: "rounded-xs h-4",
   }
 
   return (

@@ -160,7 +160,7 @@ export const SearchBar = (
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
         variant="outlined"
-        className="pl-10 !bg-[var(--color-surface)] !border !border-[var(--color-border)]"
+        className="pl-10 bg-[var(--color-surface)]! border! border-[var(--color-border)]!"
         style={{ paddingRight: (showClear || showShortcut) ? '3rem' : undefined }}
         {...props}
       />
@@ -168,7 +168,7 @@ export const SearchBar = (
       {/* Shortcut Badge */}
       {showShortcut && (
         <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-          <kbd className="px-2 py-0.5 text-xs font-mono text-[var(--color-text-primary)] bg-[var(--color-background)] border border-[var(--color-border)] rounded shadow-sm">
+          <kbd className="px-2 py-0.5 text-xs font-mono text-[var(--color-text-primary)] bg-[var(--color-background)] border border-[var(--color-border)] rounded shadow-xs">
             {shortcut}
           </kbd>
         </div>

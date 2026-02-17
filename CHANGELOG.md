@@ -1,6 +1,14 @@
 # Changelog
 
-## 2026-02-16T22:00:00Z
+
+## 2026-02-17
+
+- **Tailwind v4 Upgrade**: fully migrated to Tailwind CSS v4.0.0 with @tailwindcss/postcss.
+- **Visual Verification**: Verified runtime theme switching (Studio, Terra, Volt) and light/dark modes.
+- **Clean Up**: Removed deprecated tailwind.config.ts/js files in favor of CSS-native @theme configuration.
+- **Utility Updates**: Renamed utilities (shadow-sm -> shadow-xs, rounded-sm -> rounded-xs) to match v4 defaults.
+- **Documentation**: Fixed 404 error on "Design Tokens > Foundations" page in Sage Studio.
+
 
 - Updated all GitHub URLs from `shalomormsby/ecosystem` to `shalomormsby/sage-design-engine` across 32 files
   - Package READMEs (`ui`, `mcp`, `tokens`, `config`, `hooks`, `charts`)

@@ -120,7 +120,7 @@ export function PageLayout({
       {breadcrumbs && showBreadcrumbsAtTop && (
         <div
           className={`
-            sticky bg-[var(--color-background)]/95 backdrop-blur-sm
+            sticky bg-[var(--color-background)]/95 backdrop-blur-xs
             border-b border-[var(--color-border)]
             transition-all duration-300
             top-16 lg:top-20

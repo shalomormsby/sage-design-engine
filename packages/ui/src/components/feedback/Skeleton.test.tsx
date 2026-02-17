@@ -22,7 +22,7 @@ describe('Skeleton', () => {
 
   it('renders text variant', () => {
     const { container } = render(<Skeleton variant="text" />)
-    expect(container.firstChild).toHaveClass('rounded-sm', 'h-4')
+    expect(container.firstChild).toHaveClass('rounded-xs', 'h-4')
   })
 
   it('applies custom width and height', () => {

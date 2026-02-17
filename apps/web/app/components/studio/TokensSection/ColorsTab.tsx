@@ -164,7 +164,7 @@ export function ColorsTab() {
                   <div key={step} className="group relative">
                     <div
                       className={`
-                          h-16 rounded-lg mb-2 cursor-pointer transition-transform hover:scale-105 active:scale-95 shadow-sm border border-[var(--color-border)]
+                          h-16 rounded-lg mb-2 cursor-pointer transition-transform hover:scale-105 active:scale-95 shadow-xs border border-[var(--color-border)]
                           ${isBase ? 'ring-2 ring-[var(--color-primary)] ring-offset-2' : ''}
                         `}
                       style={{ backgroundColor: `var(${varName})` }}
@@ -172,7 +172,7 @@ export function ColorsTab() {
                     >
                       {/* Hover Copy Overlay similar to standard cards */}
                       <div className="w-full h-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                        <div className="bg-black/20 backdrop-blur-sm p-2 rounded-full text-white">
+                        <div className="bg-black/20 backdrop-blur-xs p-2 rounded-full text-white">
                           <Copy className="w-4 h-4" />
                         </div>
                       </div>
@@ -245,11 +245,11 @@ export function ColorsTab() {
                     <Card className="p-4 cursor-pointer h-full border border-[var(--color-border)] hover:border-[var(--color-primary)]">
                       {/* Color Swatch */}
                       <div
-                        className="w-full h-20 rounded-lg mb-3 border border-[var(--color-border)] shadow-sm"
+                        className="w-full h-20 rounded-lg mb-3 border border-[var(--color-border)] shadow-xs"
                         style={{ backgroundColor: `var(${token.name})` }}
                       >
                         <div className="w-full h-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                          <div className="bg-black/20 backdrop-blur-sm p-2 rounded-full text-white">
+                          <div className="bg-black/20 backdrop-blur-xs p-2 rounded-full text-white">
                             <Copy className="w-4 h-4" />
                           </div>
                         </div>
@@ -302,7 +302,7 @@ export function ColorsTab() {
             {Object.entries(semanticColors.status).map(([type, colors]) => (
               <Card key={type} className="p-6 transition-all hover:shadow-md">
                 <div
-                  className="px-4 py-3 rounded-lg mb-3 text-center font-medium shadow-sm"
+                  className="px-4 py-3 rounded-lg mb-3 text-center font-medium shadow-xs"
                   style={{
                     backgroundColor: colors.bg,
                     color: colors.fg,
@@ -361,7 +361,7 @@ export function ColorsTab() {
                 return (
                   <div
                     key={idx}
-                    className="px-4 py-3 rounded-lg flex items-center justify-between shadow-sm"
+                    className="px-4 py-3 rounded-lg flex items-center justify-between shadow-xs"
                     style={{ backgroundColor: pair.bg, color: pair.fg }}
                   >
                     <span className="font-medium">{pair.label}</span>

@@ -199,7 +199,7 @@ export function CustomizerTab() {
                                 className={`
                   px-3 py-1.5 text-xs rounded transition-all font-medium
                   ${customizationMode === 'simple'
-                                        ? 'bg-[var(--color-primary)] text-[var(--color-primary-foreground)] shadow-sm'
+                                        ? 'bg-[var(--color-primary)] text-[var(--color-primary-foreground)] shadow-xs'
                                         : 'opacity-60 hover:opacity-100'
                                     }
                 `}
@@ -211,7 +211,7 @@ export function CustomizerTab() {
                                 className={`
                   px-3 py-1.5 text-xs rounded transition-all font-medium
                   ${customizationMode === 'advanced'
-                                        ? 'bg-[var(--color-primary)] text-[var(--color-primary-foreground)] shadow-sm'
+                                        ? 'bg-[var(--color-primary)] text-[var(--color-primary-foreground)] shadow-xs'
                                         : 'opacity-60 hover:opacity-100'
                                     }
                 `}
