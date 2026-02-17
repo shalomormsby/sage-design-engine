@@ -1,0 +1,31 @@
+{
+    "name": "sage-design-engine",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "turbo run dev --concurrency 20",
+        "build": "turbo run build",
+        "lint": "turbo run lint",
+        "changeset": "changeset",
+        "version-packages": "changeset version && node scripts/append-changelog-date.js",
+        "release": "turbo run build && changeset publish"
+    },
+    "devDependencies": {
+        "@changesets/cli": "^2.29.8",
+        "turbo": "latest"
+    },
+    "packageManager": "pnpm@10.26.1",
+    "pnpm": {
+        "overrides": {
+            "@types/react": "^19",
+            "@types/react-dom": "^19",
+            "react": "^19.2.1",
+            "react-dom": "^19.2.1"
+        },
+        "onlyBuiltDependencies": [
+            "esbuild",
+            "sharp",
+            "unrs-resolver"
+        ]
+    }
+}
