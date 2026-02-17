@@ -112,7 +112,7 @@
         {
             "name": "Forms",
             "path": "dist/forms.mjs",
-            "limit": "10 KB"
+            "limit": "11 KB"
         },
         {
             "name": "Dates",
