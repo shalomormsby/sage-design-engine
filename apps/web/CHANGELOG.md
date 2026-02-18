@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.13 - 2026-02-18
+
+### Patch Changes
+
+- Updated dependencies [077f48c]
+  - @thesage/ui@1.3.0
+
 ## 0.1.12 - 2026-02-17
 
 ### Patch Changes
