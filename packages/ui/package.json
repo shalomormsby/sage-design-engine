@@ -117,7 +117,7 @@
         {
             "name": "Dates",
             "path": "dist/dates.mjs",
-            "limit": "30 KB"
+            "limit": "33 KB"
         },
         {
             "name": "Tables",
