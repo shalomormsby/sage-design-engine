@@ -52,7 +52,7 @@ export interface ColorCustomization {
   palette: ColorPalette | null;
 }
 
-export type ThemeName = 'studio' | 'terra' | 'volt';
+export type ThemeName = 'studio' | 'terra' | 'volt' | 'speedboat';
 export type ColorMode = 'light' | 'dark';
 
 interface CustomizerState {

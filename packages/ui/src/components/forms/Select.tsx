@@ -24,6 +24,7 @@ import {
 import { Check, ChevronDown, ChevronUp } from "lucide-react"
 
 import { cn } from "../../lib/utils"
+import { Label as FormLabel } from "./Label"
 
 const Select = Root
 
@@ -36,23 +37,60 @@ const SelectTrigger = (
         ref,
         className,
         children,
+        style,
+        label,
+        labelClassName,
         ...props
     }: ComponentPropsWithoutRef<typeof Trigger> & {
         ref?: React.Ref<ElementRef<typeof Trigger>>;
+        /** Optional text label rendered above the trigger. */
+        label?: string;
+        /** Override classes on the label. */
+        labelClassName?: string;
     }
-) => (<Trigger
-    ref={ref}
-    className={cn(
-        "flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-xs ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
-        className
-    )}
-    {...props}
->
-    {children}
-    <SelectIcon asChild>
-        <ChevronDown className="h-4 w-4 opacity-50" />
-    </SelectIcon>
-</Trigger>)
+) => {
+    const trigger = (
+        <Trigger
+            ref={ref}
+            className={cn(
+                "flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-xs ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
+                className
+            )}
+            style={{
+                height: '2.25rem',
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                border: '1px solid var(--color-input, #DFDFDF)',
+                borderRadius: 'var(--radius-md, 0.375rem)',
+                padding: '0.5rem 0.75rem',
+                fontSize: 'var(--text-sm, 0.875rem)',
+                backgroundColor: 'transparent',
+                boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+                outline: 'none',
+                ...style,
+            }}
+            {...props}
+        >
+            {children}
+            <SelectIcon asChild>
+                <ChevronDown className="h-4 w-4 opacity-50" />
+            </SelectIcon>
+        </Trigger>
+    )
+
+    if (!label) return trigger
+
+    return (
+        <div>
+            <FormLabel className={cn("text-xs font-medium text-muted-foreground", labelClassName)}>
+                {label}
+            </FormLabel>
+            {trigger}
+        </div>
+    )
+}
 
 const SelectScrollUpButton = (
     {
@@ -98,6 +136,7 @@ const SelectContent = (
         className,
         children,
         position = "popper",
+        style,
         ...props
     }: ComponentPropsWithoutRef<typeof Content> & {
         ref?: React.Ref<ElementRef<typeof Content>>;
@@ -111,20 +150,37 @@ const SelectContent = (
             "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
             className
         )}
+        style={style}
         position={position}
         {...props}
     >
-        <SelectScrollUpButton />
-        <Viewport
-            className={cn(
-                "p-1",
-                position === "popper" &&
-                "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]"
-            )}
+        <div
+            style={{
+                backgroundColor: 'var(--color-popover, #ffffff)',
+                color: 'var(--color-popover-foreground, #0a0a0a)',
+                borderWidth: '1px',
+                borderStyle: 'solid',
+                borderColor: 'var(--color-border, #d4d4d4)',
+                borderRadius: 'var(--radius, 0.5rem)',
+                boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+                overflow: 'hidden',
+            }}
         >
-            {children}
-        </Viewport>
-        <SelectScrollDownButton />
+            <SelectScrollUpButton />
+            <Viewport
+                className={cn(
+                    "p-1",
+                    position === "popper" &&
+                    "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]"
+                )}
+                style={{
+                    padding: '0.25rem',
+                }}
+            >
+                {children}
+            </Viewport>
+            <SelectScrollDownButton />
+        </div>
     </Content>
 </Portal>)
 
@@ -157,11 +213,34 @@ const SelectItem = (
         "relative flex w-full cursor-default select-none items-center rounded-xs py-1.5 pl-2 pr-8 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         className
     )}
+    style={{
+        position: 'relative',
+        display: 'flex',
+        width: '100%',
+        cursor: 'default',
+        userSelect: 'none',
+        alignItems: 'center',
+        borderRadius: 'var(--radius-sm, 0.125rem)',
+        padding: '0.375rem 2rem 0.375rem 0.5rem',
+        fontSize: 'var(--text-sm, 0.875rem)',
+        outline: 'none',
+    }}
     {...props}
 >
-    <span className="absolute right-2 flex h-3.5 w-3.5 items-center justify-center">
+    <span
+        className="absolute right-2 flex h-3.5 w-3.5 items-center justify-center"
+        style={{
+            position: 'absolute',
+            right: '0.5rem',
+            display: 'flex',
+            height: '0.875rem',
+            width: '0.875rem',
+            alignItems: 'center',
+            justifyContent: 'center',
+        }}
+    >
         <ItemIndicator>
-            <Check className="h-4 w-4" />
+            <Check className="h-4 w-4" style={{ height: '1rem', width: '1rem' }} />
         </ItemIndicator>
     </span>
     <ItemText>{children}</ItemText>

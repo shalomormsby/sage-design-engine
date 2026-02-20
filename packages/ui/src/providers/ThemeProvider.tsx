@@ -8,7 +8,7 @@
 import { useEffect, useState } from 'react';
 import { useThemeStore } from '../lib/store/theme';
 import { useCustomizer, type ColorPalette } from '../lib/store/customizer';
-import { studioTokens, terraTokens, voltTokens, syntaxColors, codeColors } from '@thesage/tokens';
+import { studioTokens, terraTokens, voltTokens, speedboatTokens, syntaxColors, codeColors } from '@thesage/tokens';
 import type { ThemeName, ColorMode } from '@thesage/tokens';
 
 // Theme token map
@@ -16,10 +16,11 @@ const themeTokens = {
   studio: studioTokens,
   terra: terraTokens,
   volt: voltTokens,
-};
+  speedboat: speedboatTokens,
+} satisfies Record<ThemeName, any>;
 
 // Font family map (CSS variables defined in layout)
-const fontFamilies = {
+const fontFamilies: Record<ThemeName, Record<string, string>> = {
   studio: {
     heading: 'var(--font-studio-heading)',
     body: 'var(--font-studio-body)',
@@ -32,6 +33,11 @@ const fontFamilies = {
   },
   volt: {
     sans: 'var(--font-volt-heading)',
+    mono: 'var(--font-mono)',
+  },
+  speedboat: {
+    heading: 'var(--font-montserrat)',
+    body: 'var(--font-roboto)',
     mono: 'var(--font-mono)',
   },
 };
@@ -85,6 +91,17 @@ function getThemeVars(theme: ThemeName, mode: ColorMode): Record<string, string>
     '--color-active': colors?.active || colors?.backgroundTertiary || '#f0f0f0',
     '--color-link-hover': colors?.linkHover || colors?.primary || '#0a0a0a',
     '--color-link-hover-foreground': colors?.linkHoverForeground || colors?.background || '#ffffff',
+
+    // Component-specific (previously only set in globals.css defaults)
+    '--color-card': colors?.card || colors?.background || '#ffffff',
+    '--color-card-foreground': colors?.cardForeground || colors?.foreground || '#0a0a0a',
+    '--color-popover': colors?.popover || colors?.background || '#ffffff',
+    '--color-popover-foreground': colors?.popoverForeground || colors?.foreground || '#0a0a0a',
+    '--color-muted': colors?.muted || colors?.backgroundSecondary || '#f5f5f5',
+    '--color-muted-foreground': colors?.mutedForeground || colors?.foregroundTertiary || '#737373',
+    '--color-destructive': colors?.destructive || colors?.error || '#ef4444',
+    '--color-destructive-foreground': colors?.destructiveForeground || '#ffffff',
+    '--color-input': colors?.input || colors?.border || '#d4d4d4',
 
     // Effects - Blur
     '--effect-blur-sm': effects?.blur?.sm || 'blur(4px)',
@@ -240,14 +257,38 @@ function validateThemeTokens(theme: ThemeName, mode: ColorMode): void {
   }
 }
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const { theme, mode } = useThemeStore();
+export interface ThemeProviderProps {
+  children: React.ReactNode;
+  /**
+   * Default theme to use on first load (before localStorage).
+   * Does NOT override a previously persisted theme.
+   */
+  defaultTheme?: ThemeName;
+  /**
+   * Default color mode to use on first load (before localStorage).
+   * Does NOT override a previously persisted mode.
+   */
+  defaultMode?: ColorMode;
+}
+
+export function ThemeProvider({ children, defaultTheme, defaultMode }: ThemeProviderProps) {
+  const { theme, mode, setTheme, setMode } = useThemeStore();
   // Use specific selector to get the exact palette for current theme/mode
   // This fixes the issue where full object subscription might miss updates or cause hydration issues
   const customPalette = useCustomizer((state) => state.customColors?.[theme]?.[mode]);
 
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [mounted, setMounted] = useState(false);
+
+  // Apply defaults on first mount if no persisted preference exists
+  useEffect(() => {
+    if (!defaultTheme && !defaultMode) return;
+    const persisted = typeof window !== 'undefined' && localStorage.getItem('ecosystem-theme');
+    if (persisted) return; // Respect user's saved preference
+    if (defaultTheme) setTheme(defaultTheme);
+    if (defaultMode) setMode(defaultMode);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Only on mount
 
   // Prevent hydration mismatch
   useEffect(() => {

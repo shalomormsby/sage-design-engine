@@ -3,6 +3,28 @@
 
 ## 2026-02-17
 
+### Speedboat Theme (Phase 1)
+
+- **New Theme: Speedboat** — 4th theme added to the design system, mapping SDE's CSS variable architecture to Moloco's Speedboat V2 design tokens.
+  - Light mode uses exact Figma-extracted values: accent `#346BEA`, Moloco grey scale, semantic colors (success, warning, error, info).
+  - Dark mode derived with appropriate contrast adjustments for all token categories.
+  - Typography: Montserrat (headings, 700 weight) + Roboto (body, 400 weight) — matching Moloco brand guidelines.
+  - Full token coverage: 37 color properties, 4 blur levels, 5 shadow levels, motion easing, and typography scale.
+- **Speedboat is Moloco-internal only.** The theme tokens ship in `@thesage/tokens` as inert data, but Speedboat never appears in any UI unless a consumer explicitly opts in:
+  - `CustomizerPanel` defaults to public themes only (Studio, Terra, Volt). Pass `themes={['speedboat']}` to show it.
+  - `ThemeProvider` accepts `defaultTheme="speedboat"` to set it on first load.
+  - Sage Studio docs site does not expose Speedboat in any theme selector or typography preview.
+  - Speedboat removed from the curated `fontThemes` library.
+- **New exports:** `PUBLIC_THEME_NAMES` constant and `PublicThemeName` type for consumers that need to iterate only public themes.
+- **ThemeProvider enhancements:**
+  - Added `defaultTheme` and `defaultMode` props — sets initial theme on first load without overriding persisted user preferences.
+  - Added 9 missing CSS variable mappings (`--color-card`, `--color-popover`, `--color-muted`, `--color-destructive`, `--color-input`, and their foreground variants) — benefits all themes.
+- **CustomizerPanel enhancements:**
+  - Added `themes` prop to control which themes are visible. Defaults to `PUBLIC_THEME_NAMES`.
+  - Single-element array (e.g. `['speedboat']`) hides the theme selector entirely, locking to that theme.
+
+### Earlier on 2026-02-17
+
 - **Tailwind v4 Upgrade**: fully migrated to Tailwind CSS v4.0.0 with @tailwindcss/postcss.
 - **Visual Verification**: Verified runtime theme switching (Studio, Terra, Volt) and light/dark modes.
 - **Clean Up**: Removed deprecated tailwind.config.ts/js files in favor of CSS-native @theme configuration.

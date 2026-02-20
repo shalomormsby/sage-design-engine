@@ -72,6 +72,19 @@ export const fontFamilies = {
       mono: 'Code blocks, technical content',
     },
   },
+  speedboat: {
+    heading: 'Montserrat',
+    body: 'Roboto',
+    sans: 'Roboto',
+    mono: 'Fira Code',
+    description: 'Moloco brand typography — Montserrat headings with Roboto body',
+    usage: {
+      heading: 'Brand headings, section titles',
+      body: 'UI text, data labels, form content',
+      sans: 'All sans-serif needs',
+      mono: 'Code blocks, technical content',
+    },
+  },
 } as const;
 
 /**

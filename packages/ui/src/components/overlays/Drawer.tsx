@@ -16,6 +16,7 @@ const DrawerOverlay = (
   {
     ref,
     className,
+    style,
     ...props
   }: React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay> & {
     ref?: React.Ref<React.ElementRef<typeof DrawerPrimitive.Overlay>>;
@@ -23,6 +24,11 @@ const DrawerOverlay = (
 ) => (<DrawerPrimitive.Overlay
   ref={ref}
   className={cn("fixed inset-0 z-50 bg-black/80", className)}
+  style={{
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    zIndex: 50,
+    ...style,
+  }}
   {...props}
 />)
 
@@ -31,6 +37,7 @@ const DrawerContent = (
     ref,
     className,
     children,
+    style,
     ...props
   }: React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content> & {
     ref?: React.Ref<React.ElementRef<typeof DrawerPrimitive.Content>>;
@@ -43,6 +50,13 @@ const DrawerContent = (
       "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border bg-background",
       className
     )}
+    style={{
+      backgroundColor: 'var(--color-background, #ffffff)',
+      border: '1px solid var(--color-border, #d4d4d4)',
+      borderRadius: '10px 10px 0 0',
+      zIndex: 50,
+      ...style,
+    }}
     {...props}
   >
     <div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted" />

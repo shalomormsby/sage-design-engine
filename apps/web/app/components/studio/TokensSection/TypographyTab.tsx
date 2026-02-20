@@ -5,7 +5,7 @@ import { Card, Code } from '@thesage/ui';
 import { typographySystem } from '@thesage/ui';
 import { Building2, Leaf, Zap } from 'lucide-react';
 
-// Font CSS variable mapping for each theme
+// Font CSS variable mapping for each theme (public themes only)
 const themeFontVars = {
   studio: {
     heading: 'var(--font-studio-heading)',
