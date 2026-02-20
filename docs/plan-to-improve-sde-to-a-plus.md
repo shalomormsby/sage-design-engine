@@ -2,8 +2,8 @@
 
 > **Goal:** Make the Sage Design Engine a performant, production-ready UI engine for building Moloco Speedboat sandbox apps via AI-assisted workflows (Claude Code, Cursor, etc.).
 >
-> **Last updated:** 2026-02-16 9:30 PM PST
-> **Status:** Phase 0 complete. Phases 1-7 pending.
+> **Last updated:** 2026-02-17 12:00 AM PST
+> **Status:** Phases 0 + 2 complete. Phases 1, 3-7 pending.
 > **Author:** Shalom Ormsby + Claude Opus 4.6
 
 ---
@@ -124,30 +124,105 @@ Speedboat V2 does not currently have a dark mode specification. Two options:
 
 **Option B:** Set dark mode to be identical to light mode (effectively disabling it). Not recommended because it breaks the mode toggle UX.
 
+### Token Structure (must match `studio.ts` exactly)
+
+The new `speedboatTokens` object must have `light` and `dark` keys, each containing `colors` and `effects`. Every property in `studio.ts` must be present. Reference `packages/tokens/src/studio.ts` for the exact shape.
+
+**Properties in `colors` (all required):**
+```
+background, backgroundSecondary, backgroundTertiary,
+foreground, foregroundSecondary, foregroundTertiary,
+primary, primaryForeground,
+secondary, secondaryForeground,
+accent, accentForeground,
+border, borderSubtle,
+hover, active,
+linkHover, linkHoverForeground,
+success, successForeground,
+warning, warningForeground,
+error, errorForeground,
+info, infoForeground,
+card, cardForeground,
+popover, popoverForeground,
+muted, mutedForeground,
+destructive, destructiveForeground,
+input, ring, surface,
+glass, glassBorder
+```
+
+**Properties in `effects` (all required):**
+```
+blur: { sm, md, lg, xl }
+shadow: { sm, md, lg, xl, '2xl' }
+```
+
+### Important: Which CSS Variables Are Theme-Switched
+
+ThemeProvider's `getThemeVars()` (line 42) maps token properties to CSS variables at runtime. **Not all variables** in `globals.css` are overridden by ThemeProvider. Specifically:
+
+**Theme-switched by `getThemeVars` (lines 48-131):** `--color-background`, `--color-background-secondary`, `--color-background-tertiary`, `--color-foreground`, `--color-primary`, `--color-primary-foreground`, `--color-secondary`, `--color-secondary-foreground`, `--color-accent`, `--color-accent-foreground`, `--color-success/warning/error/info` + foregrounds, `--color-glass`, `--color-glass-border`, `--color-text-primary/secondary/muted`, `--color-surface`, `--color-border`, `--color-focus`, `--color-link`, `--color-ring`, `--color-hover`, `--color-active`, `--color-link-hover`, `--effect-blur-*`, `--effect-shadow-*`, `--font-heading/body/mono`, `--ease-default/spring`, `--syntax-*`, `--code-*`
+
+**NOT theme-switched (set only in `globals.css` defaults):** `--color-card`, `--color-card-foreground`, `--color-popover`, `--color-popover-foreground`, `--color-muted`, `--color-muted-foreground`, `--color-destructive`, `--color-destructive-foreground`, `--color-input`, `--radius`
+
+**Recommendation:** Add these missing mappings to `getThemeVars` as part of Phase 1. This benefits all themes, not just Speedboat. The token properties (`card`, `popover`, `muted`, `destructive`, `input`) already exist in `studio.ts`/`terra.ts`/`volt.ts` — they're just not wired up.
+
+### Font Wiring (Key Detail)
+
+Speedboat's fonts (Roboto and Montserrat) are **already loaded** in `apps/web/lib/fonts.ts`:
+- `roboto` at line 132 → CSS variable `--font-roboto`
+- `montserrat` at line 160 → CSS variable `--font-montserrat`
+- Both are included in `allFontVariables` (line 279) applied to `<html>` in `layout.tsx:59`
+
+**No new font imports needed.** The `fontFamilies` map in ThemeProvider (line 22) just needs a `speedboat` entry pointing to the existing CSS variables:
+
+```ts
+speedboat: {
+  heading: 'var(--font-montserrat)',
+  body: 'var(--font-roboto)',
+  mono: 'var(--font-mono)',
+},
+```
+
+### ThemeSwitcher vs CustomizerPanel
+
+**`ThemeSwitcher`** (`packages/ui/src/components/forms/ThemeSwitcher.tsx`) is a **light/dark mode toggle only**. It does NOT show theme options (Studio/Terra/Volt). No changes needed for Phase 1.
+
+**`CustomizerPanel`** (`packages/ui/src/components/layout/CustomizerPanel.tsx`) is where themes are selected. It has a **hardcoded** theme list at lines 192-196:
+```tsx
+{ id: 'studio', label: 'Studio', icon: <Building2 /> },
+{ id: 'terra', label: 'Terra', icon: <Leaf /> },
+{ id: 'volt', label: 'Volt', icon: <Zap /> },
+```
+Grid is `grid-cols-3` (line 192). Changes needed:
+1. Add `{ id: 'speedboat', label: 'Speedboat', icon: <Rocket /> }` (import `Rocket` from lucide-react)
+2. Change `grid-cols-3` to `grid-cols-4`
+3. Add `speedboat` case to font preview section (lines 223-234)
+
 ### Files to Modify
 
-| File | Change |
-|---|---|
-| `packages/tokens/src/speedboat.ts` | **CREATE** — new file exporting `speedboatTokens` with light/dark color maps, effects, and motion curves following the same structure as `studio.ts` |
-| `packages/tokens/src/index.ts` | Add `export * from './speedboat'`, add `'speedboat'` to `THEME_NAMES` array, update `ThemeName` type |
-| `packages/ui/src/providers/ThemeProvider.tsx` | Import `speedboatTokens`, add to `themeTokens` map, add `speedboat` entry to `fontFamilies` map |
-| `packages/ui/src/lib/store/theme.ts` | No change needed — `ThemeName` type is imported from `@thesage/tokens` and will automatically include `'speedboat'` |
-| `packages/tokens/src/fontThemes.ts` | Add Speedboat font configuration (Roboto body, Montserrat heading) |
-| `apps/web/app/layout.tsx` | Add Google Fonts import for Roboto + Montserrat, add `--font-speedboat-heading` and `--font-speedboat-body` CSS variables |
-| `packages/ui/src/components/features/ThemeSwitcher.tsx` | Add Speedboat option to theme switcher UI (verify this renders the 4th option) |
-| `packages/ui/src/components/features/CustomizerPanel.tsx` | Add Speedboat to customizer panel theme selector |
+| File | Change | Line References |
+|---|---|---|
+| `packages/tokens/src/speedboat.ts` | **CREATE** — export `speedboatTokens` with `light`/`dark` keys containing `colors` (37 properties) + `effects` (blur + shadow). Copy structure from `studio.ts`, replace values with Speedboat tokens. | Template: `studio.ts` (131 lines) |
+| `packages/tokens/src/index.ts` | Add `export * from './speedboat'` after line 8. Add `'speedboat'` to `THEME_NAMES` array at line 19. | Lines 8, 19 |
+| `packages/ui/src/providers/ThemeProvider.tsx` | (1) Import `speedboatTokens` at line 11. (2) Add `speedboat: speedboatTokens` to `themeTokens` at line 18. (3) Add `speedboat` entry to `fontFamilies` at line 37. (4) Add missing CSS variable mappings to `getThemeVars` for card/popover/muted/destructive/input. | Lines 11, 15-19, 22-37, 42-131 |
+| `packages/ui/src/components/layout/CustomizerPanel.tsx` | (1) Import `speedboatTokens` at line 4, add `Rocket` to lucide-react import at line 3. (2) Add Speedboat to theme array at line 196. (3) Change `grid-cols-3` to `grid-cols-4` at line 192. (4) Add `speedboat` cases to font preview ternaries at lines 223-234. | Lines 3-4, 192-196, 223-234 |
+| `packages/tokens/src/fontThemes.ts` | **Optional:** Add a `speedboat` entry to the `fontThemes` array for the font selector UI. Not required for theme to function. | After line 142 (professional section) |
+| `packages/ui/src/lib/store/theme.ts` | **No change needed** — `ThemeName` type auto-updates from `@thesage/tokens`. | — |
+| `apps/web/lib/fonts.ts` | **No change needed** — Roboto and Montserrat already loaded with `--font-roboto` and `--font-montserrat` CSS variables. | Lines 132, 160 |
+| `apps/web/app/layout.tsx` | **No change needed** — `allFontVariables` already includes Roboto + Montserrat. | Line 59 |
+| `apps/web/app/components/studio/TokensSection/TypographyTab.tsx` | Add `speedboat` case to hardcoded font display names (heading: 'Montserrat', body: 'Roboto'). | Lines 11-22 |
 
 ### Acceptance Criteria
 
 - [ ] `<ThemeProvider>` with `useThemeStore.setState({ theme: 'speedboat', mode: 'light' })` renders all components with Speedboat colors/fonts
 - [ ] `useTheme().setTheme('speedboat')` switches to Speedboat theme at runtime — all components update
-- [ ] `<ThemeSwitcher />` shows Speedboat as a 4th theme option
-- [ ] `<CustomizerPanel />` allows selecting Speedboat theme
+- [ ] `<CustomizerPanel />` shows Speedboat as a 4th theme option with Rocket icon
 - [ ] Dark mode renders a reasonable dark variant (not identical to light)
 - [ ] Accent blue (#346BEA) is used for primary buttons, links, focus rings, badges
 - [ ] Body text uses Roboto; headings use Montserrat
 - [ ] Input borders use grey200 (#DFDFDF), not the default SDE border color
 - [ ] Success/warning/error semantic colors match Speedboat's palette exactly
+- [ ] `--color-card`, `--color-muted`, `--color-destructive`, `--color-popover`, `--color-input` are correctly theme-switched (new `getThemeVars` mappings)
 - [ ] All 99 components render correctly with the Speedboat theme (no missing CSS variable fallbacks)
 - [ ] `pnpm build` passes for `@thesage/tokens`, `@thesage/ui`, and `apps/web`
 - [ ] Existing themes (Studio/Terra/Volt) are unchanged
@@ -158,9 +233,11 @@ Speedboat V2 does not currently have a dark mode specification. Two options:
 
 ---
 
-## Phase 2: Tailwind v4 Upgrade (Priority: HIGH)
+## Phase 2: Tailwind v4 Upgrade (DONE)
 
-> **Why:** SDE is pinned to Tailwind CSS v3.4. Tailwind v4 has been stable since early 2025 and is the default for new projects. Every new Speedboat app would naturally use v4. Staying on v3 creates compounding tech debt — the config format, directives, and plugin system are all different.
+> Completed 2026-02-16. Upgraded to Tailwind CSS v4.0.0, tailwind-merge v3, @tailwindcss/postcss. Used Option A (JS preset via `@config`). Bumped to `@thesage/ui` v1.2.0.
+>
+> **Original rationale:** SDE was pinned to Tailwind CSS v3.4. Tailwind v4 has been stable since early 2025 and is the default for new projects. Every new Speedboat app would naturally use v4. Staying on v3 creates compounding tech debt — the config format, directives, and plugin system are all different.
 
 ### Prerequisite: Delete `apps/mobile`
 
@@ -357,18 +434,25 @@ If using Option A (`@config` to load the JS preset), the config's `theme.extend.
 
 ### Acceptance Criteria
 
-- [ ] `apps/mobile` deleted, no references remain in workspace config
-- [ ] All packages install cleanly with `pnpm install`
-- [ ] `pnpm build` passes for `@thesage/ui`, `apps/web`, `apps/portfolio`, `apps/creative-powerup`
-- [ ] `pnpm test` passes (156 tests)
-- [ ] `globals.css` files use `@import "tailwindcss"` (no `@tailwind` directives)
-- [ ] PostCSS configs use `@tailwindcss/postcss` (no `autoprefixer`)
-- [ ] Runtime theme switching works: Studio/Terra/Volt × light/dark (6 combinations verified visually)
-- [ ] Dark mode toggle works via `.dark` class strategy
-- [ ] `cn()` utility produces correct merged classes (tailwind-merge v3)
-- [ ] Bundle size does not regress beyond current size-limit budgets
-- [ ] Consumer template (`templates/nextjs-app`) builds and renders correctly
-- [ ] No visual regressions in high-usage components: Button, Card, Input, Dialog, DataTable, Sidebar, Tabs, Badge
+- [x] `apps/mobile` deleted, no references remain in workspace config
+- [x] All packages install cleanly with `pnpm install`
+- [x] `globals.css` files use `@import "tailwindcss"` (no `@tailwind` directives) — verified: zero `@tailwind` matches across repo
+- [x] PostCSS configs use `@tailwindcss/postcss` (no `autoprefixer`) — verified: `apps/web/postcss.config.js`
+- [x] All `tailwind.config.*` files removed — config loaded via `@config` directive in CSS
+- [x] `@custom-variant dark` added for class-based dark mode — `apps/web/app/globals.css:3`
+- [x] `@source` directive for monorepo paths — `apps/web/app/globals.css:4`
+- [x] `tailwind-merge` upgraded to v3 — `packages/ui/package.json:231`
+- [x] `tailwindcss` ^4.0.0 in `packages/ui` and `apps/web`
+- [x] `@tailwindcss/postcss` ^4.0.0 added as devDep
+- [x] `packages/ui/src/globals.css` kept as pure CSS variable defaults (no Tailwind directives — correct for exported library CSS)
+- [x] `pnpm build` passes for `@thesage/ui`, `apps/web`, `apps/portfolio`, `apps/creative-powerup` — verified by author
+- [x] `pnpm test` passes (156 tests) — verified by author
+- [x] Runtime theme switching works: Studio/Terra/Volt × light/dark (6 combinations verified visually) — verified by author
+- [x] Dark mode toggle works via `.dark` class strategy — verified by author
+- [x] `cn()` utility produces correct merged classes (tailwind-merge v3) — verified by author
+- [x] Bundle size does not regress beyond current size-limit budgets — verified by author
+- [x] Consumer template (`templates/nextjs-app`) builds and renders correctly — verified by author
+- [x] No visual regressions in high-usage components: Button, Card, Input, Dialog, DataTable, Sidebar, Tabs, Badge — verified by author
 
 ### Risk Assessment
 
@@ -557,16 +641,17 @@ Blocks live in `packages/ui/src/components/blocks/` and are exported from the ma
 ```
 templates/vite-react/
 ├── index.html
-├── package.json          (react, @thesage/ui, framer-motion, tailwindcss, vite)
-├── vite.config.ts        (React plugin)
-├── tailwind.config.js    (SDE preset, content paths)
-├── postcss.config.js
+├── package.json          (react, @thesage/ui, framer-motion, tailwindcss ^4, @tailwindcss/vite, vite)
+├── vite.config.ts        (React plugin + @tailwindcss/vite plugin)
+├── postcss.config.js     (@tailwindcss/postcss — only needed if not using Vite plugin)
 ├── tsconfig.json
 └── src/
     ├── main.tsx          (ThemeProvider + TooltipProvider + Toaster)
     ├── App.tsx           (example using Button, Card, ThemeSwitcher)
-    └── index.css         (@thesage/ui/globals.css import + any overrides)
+    └── index.css         (@import "tailwindcss"; @config path/to/sde-preset; @thesage/ui/globals.css import)
 ```
+
+> **Tailwind v4 Note:** No `tailwind.config.js` needed. Tailwind v4 uses CSS-first configuration via `@config` directive pointing to the SDE JS preset, or inline `@theme` blocks. For Vite, prefer `@tailwindcss/vite` plugin over PostCSS. See Phase 2 completion notes for the pattern used in the docs site.
 
 ### 6B: Update MCP `get_app_shell` Tool
 
@@ -579,7 +664,7 @@ The `get_app_shell` tool should accept a `framework` parameter:
 ### 6C: Document Vite Usage in llms-full.txt
 
 Add a "VITE + REACT SETUP" section to llms-full.txt alongside the existing Next.js setup section. Include:
-- `pnpm create vite` → install SDE → configure Tailwind → wire providers
+- `pnpm create vite` → install SDE → add `@tailwindcss/vite` plugin → CSS-first Tailwind config (`@import "tailwindcss"` + `@config`) → wire providers
 - Vite-specific gotchas (no server components, no `"use client"` concerns)
 
 ### Acceptance Criteria
@@ -661,7 +746,7 @@ Test each via `npx @thesage/mcp` and verify the output is useful, not just struc
 | Phase | Priority | Effort | Impact on Speedboat |
 |---|---|---|---|
 | **1: Speedboat Theme** | CRITICAL | 1 session | Unlocks adoption — apps look Speedboat-native |
-| **2: Tailwind v4** | HIGH | 2-3 sessions | Prevents tech debt in every new app |
+| **2: Tailwind v4** | ~~HIGH~~ DONE | ~~2-3 sessions~~ | Prevents tech debt in every new app |
 | **3: Bundle Optimization** | HIGH | 3-4 sessions | Faster installs, smaller apps |
 | **4: Eject CLI** | MEDIUM-HIGH | 1-2 sessions | Source ownership for customization |
 | **5: Page-Level Blocks** | MEDIUM | 2-3 sessions | 10x faster app scaffolding |
@@ -670,12 +755,12 @@ Test each via `npx @thesage/mcp` and verify the output is useful, not just struc
 
 ### Recommended Execution Order
 
-1. **Phase 1** (Speedboat Theme) — do first, unlocks all subsequent work
-2. **Phase 6** (Vite DX) — quick win, enables testing Phase 1 in design-code-play
-3. **Phase 5** (Blocks) — highest leverage for app building velocity
-4. **Phase 4** (Eject CLI) — needed when blocks aren't enough
-5. **Phase 3** (Bundle) — optimization pass after features stabilize
-6. **Phase 2** (Tailwind v4) — largest risk, do when other work is stable
+1. ~~**Phase 2** (Tailwind v4) — DONE~~
+2. **Phase 1** (Speedboat Theme) — do first, unlocks all subsequent work
+3. **Phase 6** (Vite DX) — quick win, enables testing Phase 1 in design-code-play
+4. **Phase 5** (Blocks) — highest leverage for app building velocity
+5. **Phase 4** (Eject CLI) — needed when blocks aren't enough
+6. **Phase 3** (Bundle) — optimization pass after features stabilize
 7. **Phase 7** (Misc) — ongoing cleanup
 
 ---
@@ -870,7 +955,7 @@ npm keywords added (10 keywords). MIT LICENSE file created at repo root.
 | `thesage.dev/.well-known/ai-plugin.json` | **200** | Valid AI plugin manifest. |
 | `thesage.dev/.well-known/mcp-server.json` | **200** | v0.8.0, 8 tools listed. |
 | `thesage.dev/robots.txt` | **200** | ClaudeBot, GPTBot, Google-Extended explicitly allowed. |
-| npm `@thesage/ui` | **1.1.1** | 11 subpath exports. 38 deps. 11 peer deps. 10 keywords. No `bin` field. |
+| npm `@thesage/ui` | **1.1.1** | 11 subpath exports. 38 deps. 11 peer deps. 10 keywords. No `bin` field. *(Now v1.2.0 after Phase 2 Tailwind v4 upgrade)* |
 | npm `@thesage/mcp` | **0.8.1** | Single dep (@modelcontextprotocol/sdk). Has `bin: sds-mcp`. |
 | GitHub `shalomormsby/sage-design-engine` | **1 star** | 0 forks. MIT license. TypeScript. |
 

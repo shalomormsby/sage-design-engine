@@ -18,6 +18,7 @@ const SheetOverlay = (
   {
     ref,
     className,
+    style,
     ...props
   }: React.ComponentPropsWithoutRef<typeof SheetPrimitive.Overlay> & {
     ref?: React.Ref<React.ElementRef<typeof SheetPrimitive.Overlay>>;
@@ -27,6 +28,11 @@ const SheetOverlay = (
     "fixed inset-0 z-50 bg-black/50 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
     className
   )}
+  style={{
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 50,
+    ...style,
+  }}
   {...props}
   ref={ref}
 />)
@@ -60,6 +66,7 @@ const SheetContent = (
     side = "right",
     className,
     children,
+    style,
     ...props
   }: SheetContentProps & {
     ref?: React.Ref<React.ElementRef<typeof SheetPrimitive.Content>>;
@@ -69,6 +76,12 @@ const SheetContent = (
   <SheetPrimitive.Content
     ref={ref}
     className={cn(sheetVariants({ side }), className)}
+    style={{
+      backgroundColor: 'var(--color-background, #ffffff)',
+      boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+      zIndex: 50,
+      ...style,
+    }}
     {...props}
   >
     {children}

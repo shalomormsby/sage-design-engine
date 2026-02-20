@@ -45,6 +45,7 @@ const MenubarContent = (
     align = "start",
     alignOffset = -4,
     sideOffset = 8,
+    style,
     ...props
   }: React.ComponentPropsWithoutRef<typeof MenubarPrimitive.Content> & {
     ref?: React.Ref<React.ElementRef<typeof MenubarPrimitive.Content>>;
@@ -56,6 +57,16 @@ const MenubarContent = (
     alignOffset={alignOffset}
     sideOffset={sideOffset}
     className={cn("z-50 min-w-[12rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md", className)}
+    style={{
+      backgroundColor: 'var(--color-popover, #ffffff)',
+      color: 'var(--color-popover-foreground, #0a0a0a)',
+      border: '1px solid var(--color-border, #d4d4d4)',
+      borderRadius: 'var(--radius, 0.5rem)',
+      boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+      zIndex: 50,
+      overflow: 'hidden',
+      ...style,
+    }}
     {...props}
   />
 </MenubarPrimitive.Portal>)

@@ -1,7 +1,8 @@
 'use client';
 import React from 'react';
-import { SlidersHorizontal, Sun, Moon, SunMoon, Building2, Leaf, Zap, X, Palette } from 'lucide-react';
-import { studioTokens, terraTokens, voltTokens } from '@thesage/tokens';
+import { SlidersHorizontal, Sun, Moon, SunMoon, Building2, Leaf, Zap, Rocket, X, Palette } from 'lucide-react';
+import { studioTokens, terraTokens, voltTokens, speedboatTokens, PUBLIC_THEME_NAMES } from '@thesage/tokens';
+import type { ThemeName } from '@thesage/tokens';
 import { useCustomizer } from '../../lib/store/customizer';
 import { useThemeStore } from '../../lib/store/theme';
 import { ColorPicker } from '../forms/ColorPicker';
@@ -20,9 +21,23 @@ export interface CustomizerPanelProps {
      * @default false
      */
     showMotionIntensity?: boolean;
+    /**
+     * Which themes to show in the selector.
+     * Defaults to public themes only (studio, terra, volt).
+     * Pass ['speedboat'] to lock to Speedboat, or include it
+     * explicitly to make it visible alongside other themes.
+     */
+    themes?: ThemeName[];
 }
 
-export const CustomizerPanel = ({ mode = 'full', showMotionIntensity = false }: CustomizerPanelProps) => {
+const allThemeOptions = [
+    { id: 'studio' as ThemeName, label: 'Studio', icon: <Building2 className="w-4 h-4" /> },
+    { id: 'terra' as ThemeName, label: 'Terra', icon: <Leaf className="w-4 h-4" /> },
+    { id: 'volt' as ThemeName, label: 'Volt', icon: <Zap className="w-4 h-4" /> },
+    { id: 'speedboat' as ThemeName, label: 'Speedboat', icon: <Rocket className="w-4 h-4" /> },
+];
+
+export const CustomizerPanel = ({ mode = 'full', showMotionIntensity = false, themes }: CustomizerPanelProps) => {
     const [mounted, setMounted] = React.useState(false);
     const [isOpen, setIsOpen] = React.useState(false);
     const panelRef = React.useRef<HTMLDivElement>(null);
@@ -37,8 +52,16 @@ export const CustomizerPanel = ({ mode = 'full', showMotionIntensity = false }: 
     } = useCustomizer();
     const { theme, mode: colorMode, setTheme, setMode } = useThemeStore();
 
+    // Filter visible themes based on the themes prop
+    // Default: only public themes (excludes Speedboat unless explicitly included)
+    const visibleThemes = themes
+        ? allThemeOptions.filter((t) => themes.includes(t.id))
+        : allThemeOptions.filter((t) => (PUBLIC_THEME_NAMES as readonly string[]).includes(t.id));
+    const showThemeSelector = visibleThemes.length > 1;
+
     // Helper to get default primary color for current theme/mode
     const getDefaultPrimary = React.useCallback((t: string, m: string) => {
+        if (t === 'speedboat') return m === 'dark' ? speedboatTokens.dark.colors.primary : speedboatTokens.light.colors.primary;
         if (t === 'volt') return m === 'dark' ? voltTokens.dark.colors.primary : voltTokens.light.colors.primary;
         if (t === 'terra') return m === 'dark' ? terraTokens.dark.colors.primary : terraTokens.light.colors.primary;
         // Studio default
@@ -185,19 +208,15 @@ export const CustomizerPanel = ({ mode = 'full', showMotionIntensity = false }: 
                     </div>
                 )}
 
-                {/* Theme Selector - Full mode only */}
-                {mode === 'full' && (
+                {/* Theme Selector - Full mode only, hidden when single theme */}
+                {mode === 'full' && showThemeSelector && (
                     <div>
                         <label className="block text-sm font-medium opacity-80 mb-3">Theme</label>
-                        <div className="grid grid-cols-3 gap-2 mb-3">
-                            {[
-                                { id: 'studio', label: 'Studio', icon: <Building2 className="w-4 h-4" /> },
-                                { id: 'terra', label: 'Terra', icon: <Leaf className="w-4 h-4" /> },
-                                { id: 'volt', label: 'Volt', icon: <Zap className="w-4 h-4" /> },
-                            ].map((t) => (
+                        <div className={`grid gap-2 mb-3 ${visibleThemes.length <= 3 ? 'grid-cols-3' : 'grid-cols-4'}`}>
+                            {visibleThemes.map((t) => (
                                 <button
                                     key={t.id}
-                                    onClick={() => setTheme(t.id as any)}
+                                    onClick={() => setTheme(t.id)}
                                     aria-pressed={theme === t.id}
                                     className={`
                                         px-3 py-2.5 rounded-lg text-sm font-medium transition-all flex flex-col items-center gap-1 border
@@ -223,14 +242,16 @@ export const CustomizerPanel = ({ mode = 'full', showMotionIntensity = false }: 
                                 <span className="font-heading">Heading:</span> {
                                     theme === 'studio' ? 'Outfit' :
                                         theme === 'terra' ? 'Lora' :
-                                            'Space Grotesk'
+                                            theme === 'speedboat' ? 'Montserrat' :
+                                                'Space Grotesk'
                                 }
                             </div>
                             <div>
                                 <span className="font-body">Body:</span> {
                                     theme === 'studio' ? 'Manrope' :
                                         theme === 'terra' ? 'Instrument Sans' :
-                                            'Space Grotesk'
+                                            theme === 'speedboat' ? 'Roboto' :
+                                                'Space Grotesk'
                                 }
                             </div>
                         </div>

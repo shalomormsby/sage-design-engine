@@ -61,7 +61,7 @@ export function ColorPicker({
     <div className="space-y-2">
       {label && (
         <div className="flex items-baseline justify-between">
-          <Label className="text-sm font-medium">
+          <Label className="text-sm font-medium mb-0">
             {label}
             {optional && <span className="text-xs text-muted-foreground ml-1">(optional)</span>}
           </Label>

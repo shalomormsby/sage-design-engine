@@ -39,9 +39,36 @@ export interface BadgeProps
     dot?: boolean;
 }
 
-function Badge({ className, variant, size, dot, children, ...props }: BadgeProps) {
+function Badge({ className, variant, size, dot, children, style, ...props }: BadgeProps & { style?: React.CSSProperties }) {
+    const sizeStyles: Record<string, React.CSSProperties> = {
+        sm: { padding: '0.125rem 0.5rem', fontSize: 'var(--text-xs, 0.75rem)' },
+        md: { padding: '0.25rem 0.625rem', fontSize: 'var(--text-sm, 0.875rem)' },
+        lg: { padding: '0.375rem 0.75rem', fontSize: '1rem' },
+    };
+    const variantStyles: Record<string, React.CSSProperties> = {
+        default: { backgroundColor: 'var(--color-primary, #346BEA)', color: 'var(--color-primary-foreground, #ffffff)', borderColor: 'transparent' },
+        secondary: { backgroundColor: 'var(--color-secondary, #EBF0FD)', color: 'var(--color-secondary-foreground, #1E49AA)', borderColor: 'transparent' },
+        destructive: { backgroundColor: 'var(--color-destructive, #C62828)', color: 'var(--color-destructive-foreground, #ffffff)', borderColor: 'transparent' },
+        outline: { color: 'var(--color-foreground, #212121)' },
+        success: { backgroundColor: 'var(--color-success, #2E7D32)', color: 'var(--color-success-foreground, #ffffff)', borderColor: 'transparent' },
+        warning: { backgroundColor: 'var(--color-warning, #E65100)', color: 'var(--color-warning-foreground, #ffffff)', borderColor: 'transparent' },
+        error: { backgroundColor: 'var(--color-error, #C62828)', color: 'var(--color-error-foreground, #ffffff)', borderColor: 'transparent' },
+        info: { backgroundColor: 'var(--color-info, #346BEA)', color: 'var(--color-info-foreground, #ffffff)', borderColor: 'transparent' },
+    };
     return (
-        <div className={cn(badgeVariants({ variant, size }), className)} {...props}>
+        <div
+            className={cn(badgeVariants({ variant, size }), className)}
+            style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                borderRadius: '9999px',
+                fontWeight: 600,
+                ...sizeStyles[size || 'md'],
+                ...variantStyles[variant || 'default'],
+                ...style,
+            }}
+            {...props}
+        >
             {dot && (
                 <span className={cn(
                     "mr-1.5 rounded-full bg-current animate-pulse",
