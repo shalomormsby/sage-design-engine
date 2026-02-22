@@ -1,0 +1,16 @@
+{
+  "projectId": "prj_HpNPbfKlV3BwjtFVfkv5uUo1NUUK",
+  "orgId": "team_cbfQc5yj0bn5AEkxqU4uH1mu",
+  "projectName": "sage-design-engine",
+  "settings": {
+    "createdAt": 1771715927132,
+    "framework": null,
+    "devCommand": null,
+    "installCommand": null,
+    "buildCommand": null,
+    "outputDirectory": null,
+    "rootDirectory": null,
+    "directoryListing": false,
+    "nodeVersion": "24.x"
+  }
+}
