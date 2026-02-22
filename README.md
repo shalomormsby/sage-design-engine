@@ -175,7 +175,7 @@ Interactive documentation at [thesage.dev](https://thesage.dev):
 
 ### Prerequisites
 
-- Node.js 20+
+- Node.js 24+ (see `.nvmrc`)
 - pnpm 8.15.0+
 
 ### Setup
