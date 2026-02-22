@@ -510,7 +510,7 @@ const { track } = sizes[safeSize]; // Safe access guaranteed`}
                         id="troubleshoot-phantom"
                         code={`// package.json in the app
 "devDependencies": {
-  "@thesage/config": "workspace:*", // Required for tailwind config
+  // Tailwind config is bundled within @thesage/ui
 }`}
                         defaultCollapsed={true}
                         showCopy={true}

@@ -1,6 +1,19 @@
 # Changelog
 
 
+## 2026-02-21
+
+### Package Architecture: 8 → 3 Packages
+
+Strategic pruning of npm package inventory. Deleted 5 packages with zero usage across the entire codebase:
+
+- **Deleted:** `@thesage/utils` (placeholder), `@thesage/core` (duplicated by @thesage/ui), `@thesage/hooks` (zero imports), `@thesage/charts` (zero imports)
+- **Absorbed:** `@thesage/config` Tailwind preset moved into `packages/ui/tailwind/index.js`
+- **Charts section** on thesage.dev now uses local component wrapper + direct recharts imports
+- **Remaining:** `@thesage/ui`, `@thesage/tokens`, `@thesage/mcp`
+
+---
+
 ## 2026-02-17
 
 ### Speedboat Theme (Phase 1)

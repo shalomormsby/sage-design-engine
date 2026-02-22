@@ -3,10 +3,10 @@
 import { useState, useEffect } from 'react';
 import { Breadcrumbs, type BreadcrumbItemLegacy } from '@thesage/ui';
 import { Card } from '@thesage/ui';
+import { Area, AreaChart, Bar, BarChart, CartesianGrid, Line, LineChart, Pie, PieChart, XAxis, YAxis, Label } from 'recharts';
 import {
-  Area, AreaChart, Bar, BarChart, CartesianGrid, Line, LineChart, Pie, PieChart, XAxis, YAxis, Label,
   ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent, type ChartConfig
-} from '@thesage/charts';
+} from '../chart';
 
 type ChartsTab = 'overview' | 'area-chart' | 'bar-chart' | 'line-chart' | 'pie-chart';
 
@@ -45,7 +45,7 @@ import { Copy, Eye, EyeOff } from 'lucide-react';
 // ... (existing chartData and chartConfig)
 
 const BAR_CHART_CODE = `import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
-import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent } from "@thesage/charts"
+import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent } from "recharts"
 
 export function Component() {
   return (
@@ -70,7 +70,7 @@ export function Component() {
 `;
 
 const LINE_CHART_CODE = `import { CartesianGrid, Line, LineChart, XAxis } from "recharts"
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@thesage/charts"
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "recharts"
 
 export function Component() {
   return (
@@ -109,7 +109,7 @@ export function Component() {
 `;
 
 const AREA_CHART_CODE = `import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@thesage/charts"
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "recharts"
 
 export function Component() {
   return (
@@ -165,7 +165,7 @@ export function Component() {
 
 const PIE_CHART_CODE = `import * as React from "react"
 import { Label, Pie, PieChart } from "recharts"
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@thesage/charts"
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "recharts"
 
 export function Component() {
   const totalVisitors = React.useMemo(() => {
