@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { ResponsiveContainer, Legend, Tooltip } from 'recharts';
-import { cn } from '../lib/utils';
+import { cn } from '@thesage/ui/utils';
 
 // Format: { THEME_NAME: { cssVariable: string; value: string } }
 const THEMES = {
@@ -336,9 +336,7 @@ function getPayloadConfigFromPayload(
 
 function colorToCssVariable(color: string | undefined): string {
     if (!color) return 'var(--color-primary)';
-    // If it's a theme variable like `var(--color-...)` return it
     if (color.startsWith('var(--')) return color;
-    // If we wanted to map theme keys to vars, we could do it here
     return color;
 }
 

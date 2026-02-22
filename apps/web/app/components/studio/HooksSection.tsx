@@ -5,7 +5,7 @@ import { Card, Button, Badge, Code, CollapsibleCodeBlock } from '@thesage/ui';
 import { TextField, Breadcrumbs, type BreadcrumbItemLegacy } from '@thesage/ui';
 import { useForm, useTheme, useToast } from '@thesage/ui';
 import { HooksOverview } from './HooksOverview';
-// import { useClipboard } from '@thesage/hooks'; // Uncomment when package export works perfectly
+// useClipboard is mocked locally below — the hook is available via @thesage/ui/hooks if needed
 
 // Mocking useClipboard for now until the package linking is fully propagated
 const useClipboard = () => {
@@ -89,13 +89,13 @@ function UseClipboardSection() {
         <h3 className="text-2xl font-semibold mb-2 text-[var(--color-text-primary)]">useClipboard</h3>
         <Card className="p-6">
           <p className="text-[var(--color-text-primary)] mb-4">
-            Copy text to the clipboard with ease. This is the first utility from the new <Code syntax="plain">@thesage/hooks</Code> package.
+            Copy text to the clipboard with ease. Available as a utility hook via <Code syntax="plain">@thesage/ui/hooks</Code>.
           </p>
 
           <div className="flex flex-col gap-4">
             <div className="text-sm text-[var(--color-text-secondary)]">
               <strong>Import:</strong>
-              <Code syntax="plain" className="mt-2">import {'{ useClipboard }'} from '@thesage/hooks';</Code>
+              <Code syntax="plain" className="mt-2">import {'{ useClipboard }'} from '@thesage/ui/hooks';</Code>
             </div>
 
             <div>

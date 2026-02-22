@@ -45,7 +45,7 @@ The Studio runs on **port 3001** by default.
 The Studio is a standard **Next.js 15** application that consumes:
 1.  **`@thesage/ui`**: The React component library (exports `Button`, `Input`, etc.).
 2.  **`@thesage/tokens`**: The design token definitions.
-3.  **`@thesage/config`**: Shared Tailwind configurations.
+3.  **`@thesage/mcp`**: MCP server for AI-assisted component discovery.
 
 ### Design System Integration
 

@@ -9,7 +9,7 @@
 
 ## Overview
 
-The Sage Design Engine is a production-ready design system that proves human-centered design through architecture, not just claims. With 92 carefully crafted components organized by functional purpose, three distinct themes with runtime switching, and a motion system that respects user accessibility needs, it's built for teams that prioritize developer experience, user agency, and code quality.
+The Sage Design Engine is a production-ready design system that proves human-centered design through architecture, not just claims. With 99 carefully crafted components organized by functional purpose, three distinct themes with runtime switching, and a motion system that respects user accessibility needs, it's built for teams that prioritize developer experience, user agency, and code quality.
 
 **What's included:**
 
@@ -80,14 +80,9 @@ export function MyComponent() {
 
 | Package | Description |
 |---------|-------------|
-| [`@thesage/ui`](https://www.npmjs.com/package/@thesage/ui) | 92 components, providers, hooks, theme system |
+| [`@thesage/ui`](https://www.npmjs.com/package/@thesage/ui) | 99 components, providers, hooks, theme system |
 | [`@thesage/tokens`](https://www.npmjs.com/package/@thesage/tokens) | Design tokens (colors, typography, spacing, motion) |
-| [`@thesage/hooks`](https://www.npmjs.com/package/@thesage/hooks) | `useTheme()`, `useMotionPreference()`, `useForm()` |
-| [`@thesage/charts`](https://www.npmjs.com/package/@thesage/charts) | Chart components built on design tokens |
-| [`@thesage/core`](https://www.npmjs.com/package/@thesage/core) | Core utilities and shared logic |
 | [`@thesage/mcp`](https://www.npmjs.com/package/@thesage/mcp) | MCP server for AI-assisted component discovery |
-| [`@thesage/utils`](https://www.npmjs.com/package/@thesage/utils) | Utilities: `cn()`, validation, animation helpers |
-| [`@thesage/config`](https://www.npmjs.com/package/@thesage/config) | Shared TypeScript and Tailwind configuration |
 
 ### Subpath Exports
 
@@ -216,17 +211,12 @@ pnpm release                      # Build and publish to NPM
 sage-design-engine/
 ├── packages/
 │   ├── ui/                    # @thesage/ui — Component library
-│   │   ├── src/components/    # 92 components by functional category
+│   │   ├── src/components/    # 99 components by functional category
 │   │   ├── src/hooks/         # useTheme, useMotionPreference
 │   │   ├── src/providers/     # ThemeProvider, TooltipProvider
 │   │   └── src/lib/           # Utilities, stores
 │   ├── tokens/                # @thesage/tokens — Design tokens
-│   ├── hooks/                 # @thesage/hooks
-│   ├── charts/                # @thesage/charts
-│   ├── core/                  # @thesage/core
-│   ├── mcp/                   # @thesage/mcp — MCP server
-│   ├── utils/                 # @thesage/utils
-│   └── config/                # @thesage/config — Shared config
+│   └── mcp/                   # @thesage/mcp — MCP server
 ├── apps/
 │   └── web/                   # Sage Studio (thesage.dev)
 ├── docs/                      # Documentation
