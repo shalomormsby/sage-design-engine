@@ -1,5 +1,11 @@
 # @thesage/ui
 
+## 1.3.1 - 2026-02-22
+
+### Patch Changes
+
+- f92e7a7: chore: consolidate monorepo architecture and enable npm trusted publishing
+
 ## 1.3.0 - 2026-02-18
 
 ### Minor Changes
