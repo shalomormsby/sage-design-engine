@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.14 - 2026-02-22
+
+### Patch Changes
+
+- Updated dependencies [f92e7a7]
+  - @thesage/ui@1.3.1
+  - @thesage/tokens@1.0.1
+  - @thesage/mcp@0.8.3
+
 ## 0.1.13 - 2026-02-18
 
 ### Patch Changes

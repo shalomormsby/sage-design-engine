@@ -1,5 +1,11 @@
 # @thesage/mcp
 
+## 0.8.3 - 2026-02-22
+
+### Patch Changes
+
+- f92e7a7: chore: consolidate monorepo architecture and enable npm trusted publishing
+
 ## 0.8.2 - 2026-02-16
 
 ### Patch Changes

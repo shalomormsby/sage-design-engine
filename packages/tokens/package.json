@@ -1,6 +1,6 @@
 {
     "name": "@thesage/tokens",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Design tokens for the Sage Design Engine — colors, typography, spacing, motion curves, and syntax highlighting across Studio, Terra, and Volt themes.",
     "license": "MIT",
     "author": "Shalom Ormsby",

@@ -1,5 +1,11 @@
 # @thesage/tokens
 
+## 1.0.1 - 2026-02-22
+
+### Patch Changes
+
+- f92e7a7: chore: consolidate monorepo architecture and enable npm trusted publishing
+
 ## 0.0.3 - 2026-01-28
 
 ### Patch Changes
