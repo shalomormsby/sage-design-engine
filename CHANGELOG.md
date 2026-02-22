@@ -1,6 +1,22 @@
 # Changelog
 
 
+## 2026-02-22
+
+### npm Trusted Publishing & Node 24
+
+Replaced token-based npm publishing with OIDC Trusted Publishing. Upgraded CI/CD from Node 20 to Node 24.
+
+- **ci.yml:** Node 20 → 24
+- **release.yml:** Node 20 → 24, added `registry-url: https://registry.npmjs.org` for OIDC auth
+- **Created `.nvmrc`** pinning Node 24 for local dev consistency
+- **Rewrote `docs/CICD-PIPELINE.md`** — removed `NPM_TOKEN` references, added Trusted Publishing setup guide
+- **Updated prerequisites** in README.md and CONTRIBUTING.md (Node 20+ → 24+)
+- **No `NPM_TOKEN` secret needed** — authentication via GitHub OIDC (`id-token: write` was already configured)
+- **One-time manual step required:** Configure Trusted Publishers on npmjs.com for each package (see docs/CICD-PIPELINE.md)
+
+---
+
 ## 2026-02-21
 
 ### Package Architecture: 8 → 3 Packages

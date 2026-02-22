@@ -2,7 +2,7 @@
 
 > Complete reference for the Sage Design Engine's continuous integration and deployment pipeline.
 
-Last updated: 2026-02-16
+Last updated: 2026-02-22
 
 ---
 
@@ -42,7 +42,7 @@ The confusion often lies here: **Publishing only happens when the system sees NO
                             │                               │
                             ▼                               ▼
                   1. Consumes changesets          **PUBLISHES TO NPM**
-                  2. Bumps package.json           (Versions allow it)
+                  2. Bumps package.json           (via Trusted Publishing)
                   3. Opens "Version PR"
                             │
                             ▼
@@ -65,7 +65,10 @@ The confusion often lies here: **Publishing only happens when the system sees NO
 **What it does:**
 1. Installs dependencies (`pnpm install --frozen-lockfile`)
 2. Builds all packages (`pnpm build` via Turborepo)
-3. Lints all packages (`pnpm lint`)
+3. Lints `@thesage/ui` (`pnpm --filter @thesage/ui lint`)
+4. Typechecks `@thesage/ui` (`pnpm --filter @thesage/ui typecheck`)
+5. Runs tests (`pnpm --filter @thesage/ui test`)
+6. Checks bundle sizes (`pnpm --filter @thesage/ui size:check`)
 
 **Required status check:** The `build` job is required to pass before merging to `main`.
 
@@ -77,16 +80,29 @@ The confusion often lies here: **Publishing only happens when the system sees NO
 
 **Trigger:** Push to `main` only (not PRs)
 
+**Authentication:** npm Trusted Publishing via GitHub OIDC. No `NPM_TOKEN` secret is needed.
+
 **What it does:**
 - Uses [changesets/action](https://github.com/changesets/action) to manage versioning and publishing
 - **If changeset files exist in `.changeset/`:** Creates a "Version Packages" PR that bumps versions in `package.json` files and updates CHANGELOGs
 - **If no changeset files exist:** Runs `pnpm run release` which builds all packages and publishes to npm via `changeset publish`
 
-**Secrets required:**
-| Secret | Purpose |
-|--------|---------|
-| `GH_TOKEN_FOR_CI` | Personal Access Token for creating PRs and GitHub Releases |
-| `NPM_TOKEN` | npm automation token for publishing packages |
+**Permissions:**
+```yaml
+permissions:
+  contents: write       # Create PRs, push branches
+  pull-requests: write  # Update PRs
+  id-token: write       # Required for OIDC token exchange (Trusted Publishing)
+```
+
+**How Trusted Publishing works here:**
+1. `id-token: write` allows GitHub to generate an OIDC token
+2. `actions/setup-node` with `registry-url: https://registry.npmjs.org` configures npm for registry auth
+3. Node 24 ships npm >= 11.5.1 which supports OIDC authentication natively
+4. `NPM_CONFIG_PROVENANCE: true` creates verifiable provenance attestations on each published package
+5. No `NPM_TOKEN` secret needed — authentication happens automatically via OIDC
+
+**Secret required:** `GH_TOKEN_FOR_CI` (for creating Version Packages PRs)
 
 **Concurrency:** Only one Release workflow runs at a time per branch.
 
@@ -139,7 +155,7 @@ Private packages (like `web`) don't need changeset entries — they get bumped a
     *   *Note:* If you look away for 2 minutes, you might miss this entirely. That's good!
 6.  **Merge triggers Release workflow again** — this time no changesets exist, so it publishes:
     *   `turbo run build` — builds all packages.
-    *   `changeset publish` — publishes bumped packages to npm.
+    *   `changeset publish` — publishes bumped packages to npm via Trusted Publishing.
 7.  **Vercel** deploys all apps from the new main commit.
 
 ### Timeline
@@ -150,6 +166,38 @@ A typical release cycle takes ~5 minutes total:
 - Auto-merge + CI (Version PR): ~2 minutes
 - Release workflow (Publish): ~30 seconds
 - Vercel deployment: ~1-2 minutes (parallel)
+
+---
+
+## npm Trusted Publishing Setup
+
+Trusted Publishing uses GitHub's OIDC identity provider to authenticate with npm — no long-lived tokens to manage or rotate.
+
+### How it works
+
+1. GitHub Actions generates a short-lived OIDC token (`id-token: write`)
+2. npm (>= 11.5.1, bundled with Node 24) exchanges the OIDC token for temporary publish credentials
+3. `NPM_CONFIG_PROVENANCE: true` creates a verifiable link between each published package and its source commit
+
+### One-time setup on npmjs.com
+
+For each package (`@thesage/ui`, `@thesage/tokens`, `@thesage/mcp`):
+
+1. Go to the package on [npmjs.com](https://www.npmjs.com) > **Settings** > **Trusted Publishers**
+2. Click **Add GitHub Actions**
+3. Fill in:
+   - **Repository owner:** `shalomormsby`
+   - **Repository name:** `sage-design-engine`
+   - **Workflow filename:** `release.yml`
+   - **Environment:** *(leave blank)*
+4. Save
+
+### Requirements
+
+- **Node.js 24** — ships with npm >= 11.5.1, which supports Trusted Publishing
+- **`registry-url`** must be set in `actions/setup-node` (configured in `release.yml`)
+- **`id-token: write`** permission (configured in `release.yml`)
+- No `NPM_TOKEN` secret needed in GitHub repository settings
 
 ---
 
@@ -174,18 +222,13 @@ All secrets are stored in GitHub repository settings under **Settings > Secrets 
 | Secret | Type | Purpose | Rotation |
 |--------|------|---------|----------|
 | `GH_TOKEN_FOR_CI` | GitHub PAT (classic) | Create PRs, approve PRs, enable auto-merge | When expired or compromised |
-| `NPM_TOKEN` | npm automation token | Publish packages to npm registry | When expired or compromised |
 
 ### PAT permissions required for `GH_TOKEN_FOR_CI`
 
 - `repo` (full control) — needed to create/approve PRs and push branches
 - `workflow` — needed to trigger workflows from automated commits
 
-### Creating a new npm token
-
-1. Go to npmjs.com > Access Tokens
-2. Generate: **Automation** type (bypasses 2FA for CI)
-3. Add to GitHub repo secrets as `NPM_TOKEN`
+**Note:** npm publishing no longer requires a secret. Authentication is handled automatically via Trusted Publishing (OIDC).
 
 ---
 
@@ -227,9 +270,11 @@ Vercel deploys are independent of GitHub Actions. Check:
 
 ### npm publish fails
 
-1. Check `NPM_TOKEN` is valid: `npm whoami --registry https://registry.npmjs.org`
-2. Check package `"access": "public"` in `.changeset/config.json`
-3. Check package is not `"private": true` in its `package.json`
+1. Verify Trusted Publishing is configured for the package on npmjs.com (Settings > Trusted Publishers)
+2. Confirm the workflow filename matches exactly what's configured on npm (`release.yml`)
+3. Check package `"access": "public"` in `.changeset/config.json`
+4. Check package is not `"private": true` in its `package.json`
+5. Check GitHub Actions logs for OIDC token exchange errors
 
 ### CI is slow
 
@@ -243,6 +288,13 @@ pnpm build
 ---
 
 ## Architecture Decisions
+
+### Why Trusted Publishing over npm tokens?
+
+- **No secrets to rotate** — OIDC tokens are generated per-run, expire immediately
+- **Provenance** — `NPM_CONFIG_PROVENANCE: true` creates a verifiable link between package and source
+- **No token leaks** — There's no long-lived token that could be compromised
+- **Audit trail** — npm shows exactly which workflow published each version
 
 ### Why Changesets over semantic-release?
 
