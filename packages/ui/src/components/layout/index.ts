@@ -15,3 +15,4 @@ export * from './ScrollArea';
 export * from './Separator';
 export * from './Sidebar';
 export * from './Stack';
+export * from './GlassSurface';
